@@ -43,12 +43,12 @@ public class StudentDatabase {
         }
     }
 
-    public void insertRecord(Student student) {
+    public void addStudent(Student student) {
         records.add(student);
     }
 
 
-    public void deleteRecord(int id) {
+    public void deleteStudent(int id) {
         records.removeIf(student -> student.getStudentID() == id);
     }
 
@@ -61,7 +61,7 @@ public class StudentDatabase {
         return false;
     }
 
-    public Student getRecord(int id) {
+    public Student getStudentData(int id) {
         for (Student s : records) {
             if (s.getStudentID() == id)
                 return s;
