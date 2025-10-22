@@ -1,0 +1,12 @@
+package LoginGUI;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class LoginGUI{
+private static JFrame frame;
+ public static void main(String[] args) {
+frame = new JFrame("Login Form");
+frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+frame.setSize(400, 300);
+frame.setLayout(new GridLayout(3, 2, 10, 10));
+
