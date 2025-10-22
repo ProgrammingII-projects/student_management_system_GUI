@@ -1,4 +1,7 @@
 package Student;
+
+import database.StudentDatabase;
+
 public class Student {
     private int studentID;
     private String name;
@@ -6,6 +9,7 @@ public class Student {
     private String gender;
     private String department;
     private double GPA;
+    private StudentDatabase studentDatabase = new StudentDatabase("Student/students.txt");
 
     public Student(int studentID, String name, int age, String gender, String department, double GPA) {
         this.studentID = studentID;
@@ -63,4 +67,11 @@ public class Student {
     public void setGPA(double GPA) {
         this.GPA = GPA;
     }
+
+    // Method to get a line representation of the student for file storage
+    public String lineRepresentation() {
+        return studentID + "," + name + "," + age + "," + gender + "," + department + "," + GPA;
+    }
+
+    
 }
