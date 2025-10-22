@@ -1,0 +1,5 @@
+1- ADD Student function
+2- view students
+3- update student
+4- delete student
+5- search student
