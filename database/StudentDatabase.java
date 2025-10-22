@@ -79,5 +79,18 @@ public class StudentDatabase {
             System.out.println("Error saving to file: " + fileName);
         }
     }
-
+    public boolean editStudent(int id, String newFullName, int newAge, String newGender, String newDepartment, double newGPA) {
+        for (Student s : records) {
+            if (s.getStudentID() == id) {
+                s.setName(newFullName);
+                s.setAge(newAge);
+                s.setGender(newGender);
+                s.setDepartment(newDepartment);
+                s.setGPA(newGPA);
+                saveToFile();
+                return true;
+            }
+        }
+        return false;
+    }
 }
