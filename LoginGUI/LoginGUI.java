@@ -9,4 +9,9 @@ frame = new JFrame("Login Form");
 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 frame.setSize(400, 300);
 frame.setLayout(new GridLayout(3, 2, 10, 10));
+ JLabel usernameLabel = new JLabel("Username:");
+JTextField usernameField = new JTextField();
+JLabel passwordLabel = new JLabel("Password:");
+JPasswordField passwordField = new JPasswordField();
+
 
