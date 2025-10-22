@@ -24,6 +24,11 @@ loginButton.addActionListener(new ActionListener() {
 public void actionPerformed(ActionEvent e) {
 String username = usernameField.getText();
 char[] password = passwordField.getPassword();
+if(username.equals("admin") && new String(password).equals("password123")) {
+JOptionPane.showMessageDialog(frame, "Login Successful!");
+}else{
+JOptionPane.showMessageDialog(frame,"Error");
+
 
 
 
