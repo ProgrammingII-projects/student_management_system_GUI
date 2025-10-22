@@ -10,10 +10,10 @@ this.studentID=studentID;
 this.name=name;
 this.age=age;
 this.gender=gender;
-this.department-department;
+this.department=department;
 this.GPA=GPA;
 }
-public int getstudentID(){
+public int getStudentID(){
 return studentID;
 }
 public void setStudentID(int studentID){
