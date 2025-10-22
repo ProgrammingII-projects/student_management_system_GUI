@@ -13,5 +13,12 @@ frame.setLayout(new GridLayout(3, 2, 10, 10));
 JTextField usernameField = new JTextField();
 JLabel passwordLabel = new JLabel("Password:");
 JPasswordField passwordField = new JPasswordField();
+  JButton loginButton = new JButton("Login");
+frame.add(usernameLabel);
+frame.add(usernameField);
+frame.add(passwordLabel);
+frame.add(passwordField);
+frame.add(new JLabel()); 
+frame.add(loginButton);
 
 
