@@ -102,7 +102,6 @@ public class StudentDatabase {
             System.out.println("Error saving to file: " + fileName);
         }
     }
-
     public boolean editStudent(int id, String newFullName, int newAge, String newGender, String newDepartment,
             double newGPA) {
         String validation = Student.validateTexString(newFullName, String.valueOf(newAge), String.valueOf(newGPA));
