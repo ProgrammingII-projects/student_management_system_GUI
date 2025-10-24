@@ -8,9 +8,22 @@ public class StudentDatabase {
 
     private ArrayList<Student> records = new ArrayList<>();
     private String fileName;
+    //setters and getters
+    public String getFileName() {
+        return fileName;
+    }
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+    public ArrayList<Student> getRecords() {
+        return records;
+    }
+    public void setRecords(ArrayList<Student> records) {
+        this.records = records;
+    }
 
     public StudentDatabase(String fileName) {
-        this.fileName = fileName;
+        setFileName(fileName);
     }
 
     private Student createRecordFrom(String line) {
