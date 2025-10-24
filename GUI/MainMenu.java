@@ -9,4 +9,6 @@ public class MainMenu {
     private JButton viewButton;
     private JButton exitButton;
     private JButton logoutButton;
+
+
 }
