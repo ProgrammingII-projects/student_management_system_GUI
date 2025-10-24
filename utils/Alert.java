@@ -17,6 +17,7 @@ public class Alert {
     public void display() {
         JFrame frame = new JFrame(text);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
         frame.setSize(300, 150);
         frame.setLocationRelativeTo(null);
 
@@ -28,6 +29,7 @@ public class Alert {
 
         JButton okButton = new JButton("OK");
         okButton.addActionListener(e -> frame.dispose());
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(okButton);
         panel.add(buttonPanel, BorderLayout.SOUTH);

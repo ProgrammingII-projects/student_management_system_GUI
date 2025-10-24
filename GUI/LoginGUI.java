@@ -6,9 +6,16 @@ import java.awt.event.*;
 import utils.Alert;
 
 public class LoginGUI {
+   
     private static JFrame frame;
 
-    public static void main(String[] args) {
+   public LoginGUI()
+   {
+    display();
+   }
+
+    
+   public void display() {
         frame = new JFrame("Login Form");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 500);
@@ -29,7 +36,7 @@ public class LoginGUI {
                 String username = usernameField.getText();
                 char[] password = passwordField.getPassword();
                 if (username.equals("admin") && new String(password).equals("password123")) {
-                    JOptionPane.showMessageDialog(frame, "Login Successful!");
+                   new Alert("Login Successful!");
                 } else {
                     new Alert("ERROR");
                 }
