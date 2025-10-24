@@ -3,6 +3,7 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import utils.Alert;
 
 public class LoginGUI {
     private static JFrame frame;
@@ -30,7 +31,7 @@ public class LoginGUI {
                 if (username.equals("admin") && new String(password).equals("password123")) {
                     JOptionPane.showMessageDialog(frame, "Login Successful!");
                 } else {
-                    JOptionPane.showMessageDialog(frame, "Error");
+                    new Alert("ERROR");
                 }
             }
         });
