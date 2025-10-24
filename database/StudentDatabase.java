@@ -8,16 +8,20 @@ public class StudentDatabase {
 
     private ArrayList<Student> records = new ArrayList<>();
     private String fileName;
-    //setters and getters
+
+    // setters and getters
     public String getFileName() {
         return fileName;
     }
+
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
+
     public ArrayList<Student> getRecords() {
         return records;
     }
+
     public void setRecords(ArrayList<Student> records) {
         this.records = records;
     }
@@ -37,10 +41,12 @@ public class StudentDatabase {
         return new Student(id, fullName, age, gender, department, gpa);
     }
 
-    public ArrayList<Student> returnAllRecords() {
+    public ArrayList<Student> viewStudents() {
+        if (records.isEmpty() || records == null) {
+            readFromFile();
+        }
         return records;
     }
-
 
     public void readFromFile() {
         records.clear();
@@ -57,14 +63,19 @@ public class StudentDatabase {
     }
 
     public void addStudent(Student student) {
+        for (Student s : records) {
+            if (s.getStudentID() == student.getStudentID())
+                    student.setStudentID(new Random().nextInt(1000) + 1);
+                return;
+        }
         records.add(student);
+        saveToFile();
     }
-
 
     public void deleteStudent(int id) {
         records.removeIf(student -> student.getStudentID() == id);
+        saveToFile();
     }
-
 
     public boolean contains(int id) {
         for (Student s : records) {
@@ -74,7 +85,7 @@ public class StudentDatabase {
         return false;
     }
 
-    public Student getStudentData(int id) {
+    public Student searchStudent(int id) {
         for (Student s : records) {
             if (s.getStudentID() == id)
                 return s;
@@ -92,7 +103,12 @@ public class StudentDatabase {
             System.out.println("Error saving to file: " + fileName);
         }
     }
-    public boolean editStudent(int id, String newFullName, int newAge, String newGender, String newDepartment, double newGPA) {
+
+    public boolean editStudent(int id, String newFullName, int newAge, String newGender, String newDepartment,
+            double newGPA) {
+        String validation = Student.validateTexString(newFullName, String.valueOf(newAge), String.valueOf(newGPA));
+        if (!validation.equals("OK"))
+            return false;
         for (Student s : records) {
             if (s.getStudentID() == id) {
                 s.setName(newFullName);
