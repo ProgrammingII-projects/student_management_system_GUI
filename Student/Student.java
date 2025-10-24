@@ -1,5 +1,7 @@
 package Student;
 
+import java.util.ArrayList;
+
 import database.StudentDatabase;
 
 public class Student {
@@ -73,5 +75,30 @@ public class Student {
         return studentID + "," + name + "," + age + "," + gender + "," + department + "," + GPA;
     }
 
+
+     public static String validate(String name, String ageStr, String gpaAsString) {
+        if (name == null || name.trim().isEmpty())
+            return "Name cannot be empty";
+
+        int age;
+        try {
+            age = Integer.parseInt(ageStr);
+            if (age < 16 || age > 100)
+                return "Age must be between 16 and 100";
+        } catch (NumberFormatException e) {
+            return "Age must be a valid number";
+        }
+
+        double gpa;
+        try {
+            gpa = Double.parseDouble(gpaAsString);
+            if (gpa < 0.0 || gpa > 4.0)
+                return "GPA must be between 0.0 and 4.0";
+        } catch (NumberFormatException e) {
+            return "GPA must be a valid number";
+        }
+
+        return "OK"; // everything is valid
+    }
     
 }
