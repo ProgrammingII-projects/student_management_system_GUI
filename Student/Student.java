@@ -1,6 +1,5 @@
 package Student;
-import database.StudentDatabase;
-
+import utils.Generator;
 public class Student {
     private int studentID;
     private String name;
