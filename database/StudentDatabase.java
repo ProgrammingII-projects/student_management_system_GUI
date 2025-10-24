@@ -63,18 +63,17 @@ public class StudentDatabase {
     }
 
     public void addStudent(Student student) {
-        for (Student s : records) {
-            if (s.getStudentID() == student.getStudentID())
-                    student.setStudentID(new Random().nextInt(1000) + 1);
-                return;
-        }
         records.add(student);
         saveToFile();
     }
 
-    public void deleteStudent(int id) {
+    public boolean deleteStudent(int id) {
+        if (!contains(id))
+            return false;
+
         records.removeIf(student -> student.getStudentID() == id);
         saveToFile();
+        return true;
     }
 
     public boolean contains(int id) {
