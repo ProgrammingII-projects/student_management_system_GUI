@@ -38,4 +38,7 @@ public class DeleteStudent extends JFrame {
             }
         });
     }
+    public void prefillStudentId(String id) {
+        studentIdField.setText(id);
+    }
 }
