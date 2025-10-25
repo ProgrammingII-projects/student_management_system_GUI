@@ -11,7 +11,6 @@ import javax.swing.*;
 
 public class DashboardController {
     private DashboardView view;
-    private AddStudentView addStudentView;
     private StudentDatabase database;
 
     public DashboardController(DashboardView view, StudentDatabase database) {
@@ -47,21 +46,6 @@ public class DashboardController {
         deleteView.setVisible(true);
     }
    
-    // methode to add student to the database
-    /* 
-    public void addStudent(Student student) {
-        Student s = new Student(student.getStudentID(), student.getName(), student.getAge(),
-                student.getGender(), student.getDepartment(), student.getGPA());
-        String state = database.addStudent(s);
-        if (state != "OK") {
-            new AlertView("Error", state);
-            return;
-        }
-        new AlertView("Success", "Student added successfully!");
-    }
-    public void deleteStudent(String ID) {
-        if (ID.isEmpty()) {
-    }*/
     public void deleteStudent(String ID) {
         if (ID.isEmpty()) {
             new AlertView("Error", "Please enter a Student ID!");
