@@ -21,5 +21,6 @@ public class test {
         
         studentWidget wid = new studentWidget(st,frame);
         wid.display();
+       
     }
 }

@@ -8,13 +8,13 @@ import java.awt.*;
 import java.awt.event.*;
 import model.*;
 
-public class displayStudent {
+public class DisplayStudent {
 
     private static JFrame frame;
     private Student student;
     private DashboardController controller;
 
-    public displayStudent(DashboardController controller , Student student) {
+    public DisplayStudent (DashboardController controller , Student student) {
         this.student = student;
         this.controller = controller;
         display();
