@@ -125,7 +125,7 @@ public class DisplayStudent {
 
         BackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               frame.dispose();
+                new AlertView("Under construction.....", null);
             }
         });
 

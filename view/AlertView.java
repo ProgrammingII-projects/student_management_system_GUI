@@ -8,6 +8,7 @@ public class AlertView {
     public AlertView(String title ,String text) {
         this(title ,text, null);
     }
+    
     //you can use this constructor to execute an action on OK button click
     public AlertView(String title, String text, Runnable onOk) {
         JFrame frame = new JFrame(title);
