@@ -61,9 +61,14 @@ public class StudentDatabase {
         }
     }
 
-    public void addStudent(Student student) {
+    // di btrabta3 goz2 mn el validation hena ba2i validation hayeb2a fi GUI we el controllers
+    public String addStudent(Student student) {
+        String validation = Student.validateTexString(student.getName(), String.valueOf(student.getAge()), String.valueOf(student.getGPA()));
+        if(validation != "OK")
+            return validation;
         records.add(student);
         saveToFile();
+        return "OK";
     }
 
     public boolean deleteStudent(int id) {
