@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
 
 import model.*;
 
-public class test {
+public class DisplayStudentsController {
     public static void main(String[] args) {
     
 
