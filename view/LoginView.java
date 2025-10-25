@@ -27,11 +27,11 @@ public class LoginView extends JFrame {
         Dimension fieldSize = new Dimension(400, 40);
 
         JLabel usernameLabel = new JLabel("Username");
-        usernameField = new JTextField();
+         usernameField = new JTextField();
         usernameField.setPreferredSize(fieldSize);
 
         JLabel passwordLabel = new JLabel("Password");
-        passwordField = new JPasswordField();
+         passwordField = new JPasswordField();
         passwordField.setPreferredSize(fieldSize);
 
         loginButton = new JButton("Login");

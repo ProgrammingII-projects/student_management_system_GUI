@@ -103,8 +103,11 @@ public class displayStudent {
         buttonPanel.add(DeleteButton);
         buttonPanel.add(BackButton);
 
+        
        
         frame.add(buttonPanel);
+        studentWidget.display();
+        
 
        
         EditButton.addActionListener(new ActionListener() {
