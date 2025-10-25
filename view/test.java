@@ -1,6 +1,5 @@
 package view;
 
-import view.displayStudent;
 
 import javax.swing.JFrame;
 

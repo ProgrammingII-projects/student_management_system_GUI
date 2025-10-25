@@ -12,11 +12,9 @@ public class DisplayStudent {
 
     private static JFrame frame;
     private Student student;
-    private DashboardController controller;
 
-    public DisplayStudent (DashboardController controller , Student student) {
+    public DisplayStudent (Student student) {
         this.student = student;
-        this.controller = controller;
         display();
     }
 
