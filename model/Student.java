@@ -95,7 +95,7 @@ public class Student {
             return "GPA must be a valid number";
         }
 
-        return "OK"; // everything is valid
+        return "OK"; // everything is valid except department and gender and alraedy id is generated in GUI
     }
     
 }

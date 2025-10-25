@@ -4,9 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AlertView {
+    //you cann use this constructor if you don't need to execute any action on OK button click
     public AlertView(String text) {
         this(text, null);
     }
+    //you can use this constructor to execute an action on OK button click
     public AlertView(String text, Runnable onOk) {
         JFrame frame = new JFrame("Message");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
