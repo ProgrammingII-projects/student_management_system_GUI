@@ -8,7 +8,7 @@ import model.Student;
 import model.StudentDatabase;
 
 public class TableTemplate {
-    publ {
+    public static void main(String[] args) {
         
         StudentDatabase database = new StudentDatabase("model/students.txt");
         ArrayList<Student> students = database.getRecords();
@@ -41,13 +41,13 @@ public class TableTemplate {
 
         // Proper button renderer for Action column
         table.getColumn("Action").setCellRenderer((table1, value, isSelected, hasFocus, row, column) -> {
-            JButton button = new JButton("Show");
+            JButton button = new JButton("Show 🔎");
             return button;
         });
 
         // Proper button editor using DefaultCellEditor with a JCheckBox, but placing button inside
         class ButtonEditor extends DefaultCellEditor {
-            private JButton button = new JButton("Show");
+            private JButton button = new JButton("Show 🔎");
             public ButtonEditor() {
                 super(new JCheckBox());
                 button.addActionListener(e -> {
@@ -62,7 +62,7 @@ public class TableTemplate {
             }
 
             public Object getCellEditorValue() {
-                return "Show";
+                return "Show 🔎";
             }
         }
         table.getColumn("Action").setCellEditor(new ButtonEditor());
