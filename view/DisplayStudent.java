@@ -5,12 +5,12 @@ import java.awt.*;
 import java.awt.event.*;
 import model.*;
 
-public class displayStudent {
+public class DisplayStudent {
 
     private static JFrame frame;
     Student student;
 
-    public displayStudent(Student student) {
+    public DisplayStudent(Student student) {
         this.student = student;
         
         display();

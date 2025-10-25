@@ -1,10 +1,11 @@
-package view;
+package Unused;
 
 
 import javax.swing.*;
 import java.util.ArrayList;
 
 import model.*;
+import view.studentWidget;
 
 public class DisplayStudents {
 
