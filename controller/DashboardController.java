@@ -62,8 +62,8 @@ public class DashboardController {
     public void deleteStudent(String ID) {
         if (ID.isEmpty()) {
     }*/
-    public void deleteStudent(String input) {
-        if (input.isEmpty()) {
+    public void deleteStudent(String ID) {
+        if (ID.isEmpty()) {
             new AlertView("Error", "Please enter a Student ID!");
             return;
         }
@@ -91,14 +91,14 @@ public class DashboardController {
         }
     }
 
-    public void searchStudent(String input) {
-        if (input.isEmpty()) {
+    public void searchStudent(String ID) {
+        if (ID.isEmpty()) {
             new AlertView("Error", "Please enter a Student ID!");
             return;
         }
 
         try {
-            int id = Integer.parseInt(input);
+            int id = Integer.parseInt(ID);
             Student student = database.searchStudent(id);
 
             if (student != null) {
