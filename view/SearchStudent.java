@@ -4,15 +4,15 @@ import javax.swing.*;
 import java.awt.event.*;
 import controller.DashboardController;
 
-public class DeleteStudent extends JFrame {
+public class SearchStudent extends JFrame {
     private JTextField studentIdField;
-    private JButton deleteButton;
+    private JButton searchButton;
     private DashboardController controller;
 
-    public DeleteStudent(DashboardController controller) {
+    public SearchStudent(DashboardController controller) {
         this.controller = controller;
 
-        setTitle("Delete Student");
+        setTitle("Search Student");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(350, 180);
         setLayout(null);
@@ -26,15 +26,16 @@ public class DeleteStudent extends JFrame {
         studentIdField.setBounds(150, 30, 150, 25);
         add(studentIdField);
 
-        deleteButton = new JButton("Delete");
-        deleteButton.setBounds(110, 80, 120, 30);
-        add(deleteButton);
+        searchButton = new JButton("Search");
+        searchButton.setBounds(110, 80, 120, 30);
+        add(searchButton);
 
-        deleteButton.addActionListener(new ActionListener() {
+        // Send the search request to the controller
+        searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String input = studentIdField.getText().trim();
-                controller.deleteStudent(input);
+                controller.searchStudent(input);
             }
         });
     }

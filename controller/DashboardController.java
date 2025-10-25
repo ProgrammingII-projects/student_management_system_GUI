@@ -3,9 +3,12 @@ package controller;
 import view.DashboardView;
 import view.AddStudentView;
 import view.AlertView;
+import view.*;
 import model.Student;
 import model.StudentDatabase;
 import utils.Generator;
+
+import javax.swing.*;
 
 public class DashboardController {
     private DashboardView view;
@@ -20,13 +23,15 @@ public class DashboardController {
 
     private void initController() {
         view.getAddButton().addActionListener(
-                e -> {
+
+           e -> {
                     AddStudentView addStudentView = new AddStudentView();
                     new AddStudentController(addStudentView, database);
-                });
-        view.getDeleteButton().addActionListener(e -> new AlertView("hello", "Delete clicked!"));
-        view.getSearchButton().addActionListener(e -> new AlertView("hello", "Search clicked!"));
-        view.getViewButton().addActionListener(e -> new AlertView("hello", "View clicked!"));
+                }
+        );
+        view.getDeleteButton().addActionListener(e -> openDeleteWindow());
+        view.getSearchButton().addActionListener(e -> openSearchWindow());
+        view.getViewButton().addActionListener(e -> new AlertView("hello","View clicked!"));
         view.getExitButton().addActionListener(e -> System.exit(0));
         view.getLogoutButton().addActionListener(e -> {
             view.dispose();
@@ -34,6 +39,14 @@ public class DashboardController {
         });
     }
 
+    private void openSearchWindow() {
+        SearchStudent searchView = new SearchStudent(this);
+        searchView.setVisible(true);
+    }
+    private void openDeleteWindow() {
+        DeleteStudent deleteView = new DeleteStudent(this);
+        deleteView.setVisible(true);
+    }
     // methode to add student to the database
     public void addStudent(Student student) {
         Student s = new Student(student.getStudentID(), student.getName(), student.getAge(),
@@ -45,15 +58,55 @@ public class DashboardController {
         }
         new AlertView("Success", "Student added successfully!");
     }
+    public void deleteStudent(String input) {
+        if (input.isEmpty()) {
+            new AlertView("Error", "Please enter a Student ID!");
+            return;
+        }
 
-    public void deleteStudent(Student student) {
+        try {
+            int id = Integer.parseInt(input);
 
-        if (database.deleteStudent(student.getStudentID())) {
-            new AlertView("Success", "Student deleted successfully!");
+            int confirm = JOptionPane.showConfirmDialog(
+                    null,
+                    "Are you sure you want to delete student with ID: " + id + "?",
+                    "Confirm Delete",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+            );
 
-        } else {
-            new AlertView("Error", "Student not deleted!");
+            if (confirm == JOptionPane.YES_OPTION) {
+                if (database.deleteStudent(id)) {
+                    new AlertView("Success", "Student deleted successfully!");
+                } else {
+                    new AlertView("Error", "Student not found or not deleted!");
+                }
+            }
+        } catch (NumberFormatException ex) {
+            new AlertView("Error", "Student ID must be a number!");
         }
     }
 
+    public void searchStudent(String input) {
+        if (input.isEmpty()) {
+            new AlertView("Error", "Please enter a Student ID!");
+            return;
+        }
+
+        try {
+            int id = Integer.parseInt(input);
+            Student student = database.searchStudent(id);
+
+            if (student != null) {
+               new displayStudent(student);
+
+            } else {
+                new AlertView("Error", "Student not found!");
+            }
+        } catch (NumberFormatException ex) {
+            new AlertView("Error", "Student ID must be a number!");
+        }
+    }
 }
+
+
