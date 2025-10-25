@@ -1,4 +1,4 @@
-package Unused;
+/*package Unused;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -6,7 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import model.*;
 
-public class studentWidget {
+public class StudentWidget {
 
     private Student student;
     private JPanel buttonPanel;
@@ -35,3 +35,4 @@ public class studentWidget {
         return buttonPanel;
     }
 }
+*/

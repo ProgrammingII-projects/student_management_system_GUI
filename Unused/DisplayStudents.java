@@ -5,7 +5,6 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 import model.*;
-import view.studentWidget;
 
 public class DisplayStudents {
 
