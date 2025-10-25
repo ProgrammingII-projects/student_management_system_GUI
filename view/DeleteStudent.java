@@ -2,20 +2,18 @@ package view;
 
 import javax.swing.*;
 import java.awt.event.*;
-
-import model.Student;
-import model.StudentDatabase;
+import controller.DashboardController;
 
 public class DeleteStudent extends JFrame {
     private JTextField studentIdField;
     private JButton deleteButton;
-    private StudentDatabase database;
+    private DashboardController controller;
 
-    public DeleteStudent(StudentDatabase database) {
-        this.database = database;
+    public DeleteStudent(DashboardController controller) {
+        this.controller = controller;
 
         setTitle("Delete Student");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(350, 180);
         setLayout(null);
         setLocationRelativeTo(null);
@@ -32,48 +30,12 @@ public class DeleteStudent extends JFrame {
         deleteButton.setBounds(110, 80, 120, 30);
         add(deleteButton);
 
-        // Action listener for delete
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String input = studentIdField.getText().trim();
-
-                if (input.isEmpty()) {
-                    new AlertView("Error", "Please enter a Student ID!");
-                    return;
-                }
-
-                try {
-                    int id = Integer.parseInt(input);
-
-                    int confirm = JOptionPane.showConfirmDialog(
-                            null,
-                            "Are you sure you want to delete student with ID: " + id + "?",
-                            "Confirm Delete",
-                            JOptionPane.YES_NO_OPTION,
-                            JOptionPane.WARNING_MESSAGE
-                    );
-
-                    if (confirm == JOptionPane.YES_OPTION) {
-                        // Delete student
-                        if (database.deleteStudent(id)) {
-                            new AlertView("Success", "Student deleted successfully!");
-                        } else {
-                            new AlertView("Error", "Student not found or not deleted!");
-                        }
-                    } else {
-                        System.exit(0);
-                    }
-
-                } catch (NumberFormatException ex) {
-                    new AlertView("Error", "Student ID must be a number!");
-                }
+                controller.deleteStudent(input);
             }
         });
-    }
-
-    public static void main(String[] args) {
-        StudentDatabase db = new StudentDatabase("model/students.txt");
-        SwingUtilities.invokeLater(() -> new DeleteStudent(db).setVisible(true));
     }
 }

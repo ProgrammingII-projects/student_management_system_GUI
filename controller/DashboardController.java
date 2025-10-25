@@ -1,10 +1,8 @@
 package controller;
 
-import view.DashboardView;
-import view.AlertView;
+import view.*;
 import model.Student;
 import model.StudentDatabase;
-import view.SearchStudent;
 
 import javax.swing.*;
 
@@ -28,7 +26,7 @@ public class DashboardController {
             }
         }*/ new AlertView("hello","Add clicked!")
         );
-        view.getDeleteButton().addActionListener(e -> new AlertView("hello","Delete clicked!"));
+        view.getDeleteButton().addActionListener(e -> openDeleteWindow());
         view.getSearchButton().addActionListener(e -> openSearchWindow());
         view.getViewButton().addActionListener(e -> new AlertView("hello","View clicked!"));
         view.getExitButton().addActionListener(e -> System.exit(0));
@@ -41,6 +39,10 @@ public class DashboardController {
         SearchStudent searchView = new SearchStudent(this);
         searchView.setVisible(true);
     }
+    private void openDeleteWindow() {
+        DeleteStudent deleteView = new DeleteStudent(this);
+        deleteView.setVisible(true);
+    }
     // methode to add student to the database
     public void addStudent(Student student) {
         Student s = new Student(student.getStudentID(), student.getName(), student.getAge(),
@@ -52,18 +54,35 @@ public class DashboardController {
         }
         new AlertView("Success", "Student added successfully!" );
     }
-    public void deleteStudent(Student student) {
+    public void deleteStudent(String input) {
+        if (input.isEmpty()) {
+            new AlertView("Error", "Please enter a Student ID!");
+            return;
+        }
 
-          if(database.deleteStudent(student.getStudentID()))
-          {
-              new AlertView("Success", "Student deleted successfully!");
+        try {
+            int id = Integer.parseInt(input);
 
-          }
-          else
-          {
-              new AlertView("Error", "Student not deleted!");
-          }
+            int confirm = JOptionPane.showConfirmDialog(
+                    null,
+                    "Are you sure you want to delete student with ID: " + id + "?",
+                    "Confirm Delete",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                if (database.deleteStudent(id)) {
+                    new AlertView("Success", "Student deleted successfully!");
+                } else {
+                    new AlertView("Error", "Student not found or not deleted!");
+                }
+            }
+        } catch (NumberFormatException ex) {
+            new AlertView("Error", "Student ID must be a number!");
+        }
     }
+
     public void searchStudent(String input) {
         if (input.isEmpty()) {
             new AlertView("Error", "Please enter a Student ID!");
@@ -75,18 +94,8 @@ public class DashboardController {
             Student student = database.searchStudent(id);
 
             if (student != null) {
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Student Found:\n\n" +
-                                "ID: " + student.getStudentID() + "\n" +
-                                "Name: " + student.getName() + "\n" +
-                                "Age: " + student.getAge() + "\n" +
-                                "Gender: " + student.getGender() + "\n" +
-                                "Department: " + student.getDepartment() + "\n" +
-                                "GPA: " + student.getGPA(),
-                        "Search Result",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
+               new displayStudent(student);
+
             } else {
                 new AlertView("Error", "Student not found!");
             }
