@@ -6,7 +6,6 @@ import view.AlertView;
 import view.*;
 import model.Student;
 import model.StudentDatabase;
-import utils.Generator;
 
 import javax.swing.*;
 
@@ -98,7 +97,7 @@ public class DashboardController {
             Student student = database.searchStudent(id);
 
             if (student != null) {
-               new displayStudent(student);
+               new DisplayStudent(student);
 
             } else {
                 new AlertView("Error", "Student not found!");

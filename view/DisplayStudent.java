@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import model.*;
 
-public class displayStudent {
+public class DisplayStudent {
 
     private static JFrame frame;
 
@@ -16,7 +16,7 @@ public class displayStudent {
     private String department;
     private double GPA;
 
-    public displayStudent(Student student) {
+    public DisplayStudent(Student student) {
         Name = student.getName();
         studentID = student.getStudentID();
         age = student.getAge();
