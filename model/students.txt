@@ -4,3 +4,6 @@
 1004,Lina Adel,20,Female,Pharmacy,3.6
 1005,Mostafa Ali,22,Male,Mechanical Engineering,3.2
 45167041,farouk,50,Male,Computer Science,3.8
+15430134,alaa,50,Male,Computer Science,3.8
+36501461,hi,15,Male,Computer Science,3.9
+30760617,456,14,Male,Computer Science,3.5

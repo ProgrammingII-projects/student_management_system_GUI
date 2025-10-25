@@ -46,7 +46,9 @@ public class DashboardController {
         DeleteStudent deleteView = new DeleteStudent(this);
         deleteView.setVisible(true);
     }
+   
     // methode to add student to the database
+    /* 
     public void addStudent(Student student) {
         Student s = new Student(student.getStudentID(), student.getName(), student.getAge(),
                 student.getGender(), student.getDepartment(), student.getGPA());
@@ -56,7 +58,7 @@ public class DashboardController {
             return;
         }
         new AlertView("Success", "Student added successfully!");
-    }
+    }*/
     public void deleteStudent(String input) {
         if (input.isEmpty()) {
             new AlertView("Error", "Please enter a Student ID!");
