@@ -8,7 +8,13 @@ import model.Student;
 import model.StudentDatabase;
 
 public class TableTemplate {
-    public static void main(String[] args) {
+
+    tabTableTemplate()
+    {
+
+    }
+
+    public display(){
         
         StudentDatabase database = new StudentDatabase("model/students.txt");
         ArrayList<Student> students = database.getRecords();
