@@ -9,12 +9,12 @@ import model.StudentDatabase;
 
 public class TableTemplate {
 
-    tabTableTemplate()
+    public TableTemplate()
     {
-
+        display();
     }
 
-    public display(){
+    public void display(){
         
         StudentDatabase database = new StudentDatabase("model/students.txt");
         ArrayList<Student> students = database.getRecords();
