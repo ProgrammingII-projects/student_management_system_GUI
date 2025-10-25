@@ -8,9 +8,9 @@ Commited to:
 Commited to: 
 
 4- delete student
-Commited to: 
+Commited to: Islam
 
 5- search student
-Commited to: 
+Commited to: Islam
 
 6-make back button in all panels and to remove previous panel

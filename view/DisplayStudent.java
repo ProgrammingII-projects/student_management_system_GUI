@@ -1,29 +1,25 @@
 package view;
 
 import javax.swing.*;
+
+import controller.DashboardController;
+
 import java.awt.*;
 import java.awt.event.*;
+
+import controller.EditStudentController;
 import model.*;
 
 public class DisplayStudent {
 
     private static JFrame frame;
+    private Student student;
+    private DashboardController controller;
 
-    private String Name;
-    private int studentID;
-    private int age;
-    private String gender;
-    private String department;
-    private double GPA;
 
-    public DisplayStudent(Student student) {
-        Name = student.getName();
-        studentID = student.getStudentID();
-        age = student.getAge();
-        gender = student.getGender();
-        department = student.getDepartment();
-        GPA = student.getGPA();
-        
+    public DisplayStudent(Student student, DashboardController controller) {
+        this.student = student;
+        this.controller = controller;
         display();
     }
 
@@ -44,27 +40,27 @@ public class DisplayStudent {
 
         frame.setLayout(new GridLayout(7,2 , 5, 1));
 
-        
+
         JLabel nameLabel = new JLabel("       Name : ");
-        JLabel nameText = new JLabel(Name);
+        JLabel nameText = new JLabel(student.getName());
 
         JLabel IDLabel = new JLabel("       ID : ");
-        JLabel IDText = new JLabel(String.valueOf(studentID));
+        JLabel IDText = new JLabel(String.valueOf(student.getStudentID()));
 
         JLabel AgeLabel = new JLabel("       Age : ");
-        JLabel AgeText = new JLabel(String.valueOf(age));
+        JLabel AgeText = new JLabel(String.valueOf(student.getAge()));
 
         JLabel GenderLabel = new JLabel("       Gender : ");
-        JLabel GenderText = new JLabel(gender);
+        JLabel GenderText = new JLabel(student.getGender());
 
         JLabel DepartmentLabel = new JLabel("       Department : ");
-        JLabel DepartmentText = new JLabel(department);
+        JLabel DepartmentText = new JLabel(student.getDepartment());
 
         JLabel GPALabel = new JLabel("       GPA : ");
-        JLabel GPAText = new JLabel(String.valueOf(GPA));
+        JLabel GPAText = new JLabel(String.valueOf(student.getGPA()));
 
 
-        
+
         frame.add(nameLabel);
         frame.add(nameText);
 
@@ -85,43 +81,51 @@ public class DisplayStudent {
 
 
 
-        
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 30));
-        
-        
+
+
         JButton EditButton = new JButton("Edit Student");
         JButton DeleteButton = new JButton("Delete student");
         JButton BackButton = new JButton("Back");
-        
+
         Dimension buttonSize = new Dimension(120, 40); // standard size of buttons we will use
+
         EditButton.setPreferredSize(buttonSize);
         DeleteButton.setPreferredSize(buttonSize);
         BackButton.setPreferredSize(buttonSize);
-        
+
         buttonPanel.add(EditButton);
         buttonPanel.add(DeleteButton);
         buttonPanel.add(BackButton);
 
-       
+        /*
+        // Display the student widget (summary) above the buttons
+        studentWidget st = new studentWidget(student,frame);
+        frame.add(st.getPanel());
+
+
+       */
         frame.add(buttonPanel);
 
-       
-        EditButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new AlertView("Under construction.....", null);
-            }
+
+
+        EditButton.addActionListener(e -> {
+            frame.dispose(); // close current display
+            EditStudentView editView = new EditStudentView(student);
+            new EditStudentController(editView, controller.getDatabase()); // use same DB
         });
 
-        DeleteButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new AlertView("Under construction.....",null);
-            }
+
+        DeleteButton.addActionListener(e -> {
+                controller.deleteStudent(String.valueOf(student.getStudentID()));
+                frame.dispose(); // close after delete
         });
 
         BackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new AlertView("Under construction.....", null);
+               frame.dispose();
             }
         });
 
