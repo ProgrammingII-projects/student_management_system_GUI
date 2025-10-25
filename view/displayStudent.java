@@ -1,6 +1,9 @@
 package view;
 
 import javax.swing.*;
+
+import controller.DashboardController;
+
 import java.awt.*;
 import java.awt.event.*;
 import model.*;
@@ -8,11 +11,12 @@ import model.*;
 public class displayStudent {
 
     private static JFrame frame;
-    Student student;
+    private Student student;
+    private DashboardController controller;
 
-    public displayStudent(Student student) {
+    public displayStudent(DashboardController controller , Student student) {
         this.student = student;
-        
+        this.controller = controller;
         display();
     }
 
@@ -84,7 +88,7 @@ public class displayStudent {
         JButton BackButton = new JButton("Back");
         
         Dimension buttonSize = new Dimension(120, 40); // standard size of buttons we will use
-        
+
         EditButton.setPreferredSize(buttonSize);
         DeleteButton.setPreferredSize(buttonSize);
         BackButton.setPreferredSize(buttonSize);
@@ -93,13 +97,13 @@ public class displayStudent {
         buttonPanel.add(DeleteButton);
         buttonPanel.add(BackButton);
 
-        
+        /* 
         // Display the student widget (summary) above the buttons
         studentWidget st = new studentWidget(student,frame);
         frame.add(st.getPanel());
         frame.add(buttonPanel);
 
-       
+       */
         
 
        
