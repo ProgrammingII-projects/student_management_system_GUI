@@ -6,6 +6,8 @@ import controller.DashboardController;
 
 import java.awt.*;
 import java.awt.event.*;
+
+import controller.EditStudentController;
 import model.*;
 
 public class DisplayStudent {
@@ -109,11 +111,12 @@ public class DisplayStudent {
 
 
 
-        EditButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-            }
+        EditButton.addActionListener(e -> {
+            frame.dispose(); // close current display
+            EditStudentView editView = new EditStudentView(student);
+            new EditStudentController(editView, controller.getDatabase()); // use same DB
         });
+
 
         DeleteButton.addActionListener(e -> {
                 controller.deleteStudent(String.valueOf(student.getStudentID()));

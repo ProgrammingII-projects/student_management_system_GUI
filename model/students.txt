@@ -1,4 +1,4 @@
 69909007,Islam,20,Male,Computer Science,4.0
-1003,Omar Youssef,21,Male,Electrical Engineering,3.9
+1003,Omar Islam,19,Female,Engineering,2.0
 1004,Lina Adel,20,Female,Pharmacy,3.6
 1005,Mostafa Ali,22,Male,Mechanical Engineering,3.2
