@@ -111,6 +111,19 @@ public class DashboardController {
             new AlertView("Error", "Student ID must be a number!");
         }
     }
+    public void editStudent(int id, String name, int age, String gender, String department, double gpa) {
+        boolean updated = database.editStudent(id, name, age, gender, department, gpa);
+
+        if (updated) {
+            new AlertView("Success", "Student details updated successfully!");
+        } else {
+            new AlertView("Error", "Failed to update student. Please check the ID and inputs!");
+        }
+    }
+    public StudentDatabase getDatabase() {
+        return database;
+    }
+
 }
 
 
