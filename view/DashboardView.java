@@ -8,21 +8,6 @@ import java.awt.*;
 
 public class DashboardView extends JFrame {
     private JButton addButton, deleteButton, searchButton, viewButton, exitButton, logoutButton;
-    /* 
-     public Student getStudentDetailsFromInput() {
-        try {
-            String id = studentIDField.getText();
-            String name = nameField.getText();
-            int age = Integer.parseInt(ageField.getText());
-            String gender = genderField.getText();
-            String department = departmentField.getText();
-            double gpa = Double.parseDouble(gpaField.getText());
-            return new Student(id, name, age, gender, department, gpa);
-        } catch (NumberFormatException e) {
-            new AlertView("Error", "Please enter valid numeric values for age and GPA");
-            return null;
-        }
-    }*/
     public DashboardView() {
         setTitle("Dashboard");
         setSize(400, 300);
