@@ -47,10 +47,15 @@ public class DashboardController {
     }
     public void deleteStudent(Student student) {
 
-        if(database.contains(student.getStudentID()))
+          if(database.deleteStudent(student.getStudentID()))
+          {
+              new AlertView("Success", "Student deleted successfully!");
 
-
-           database.deleteStudent(student.getStudentID());
+          }
+          else
+          {
+              new AlertView("Error", "Student not deleted!");
+          }
     }
 
 }

@@ -27,6 +27,7 @@ public class StudentDatabase {
 
     public StudentDatabase(String fileName) {
         setFileName(fileName);
+        readFromFile();
     }
 
     private Student createRecordFrom(String line) {
