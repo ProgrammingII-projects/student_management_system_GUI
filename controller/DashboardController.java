@@ -38,11 +38,11 @@ public class DashboardController {
         });
     }
 
-    private void openSearchWindow() {
+    public void openSearchWindow() {
         SearchStudent searchView = new SearchStudent(this);
         searchView.setVisible(true);
     }
-    private void openDeleteWindow() {
+    public void openDeleteWindow() {
         DeleteStudent deleteView = new DeleteStudent(this);
         deleteView.setVisible(true);
     }
@@ -58,6 +58,9 @@ public class DashboardController {
             return;
         }
         new AlertView("Success", "Student added successfully!");
+    }
+    public void deleteStudent(String ID) {
+        if (ID.isEmpty()) {
     }*/
     public void deleteStudent(String input) {
         if (input.isEmpty()) {
@@ -66,7 +69,7 @@ public class DashboardController {
         }
 
         try {
-            int id = Integer.parseInt(input);
+            int id = Integer.parseInt(ID);
 
             int confirm = JOptionPane.showConfirmDialog(
                     null,
@@ -99,7 +102,7 @@ public class DashboardController {
             Student student = database.searchStudent(id);
 
             if (student != null) {
-               new DisplayStudent(student);
+               new DisplayStudent(student,this);
 
             } else {
                 new AlertView("Error", "Student not found!");
