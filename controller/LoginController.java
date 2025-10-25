@@ -23,7 +23,7 @@ public class LoginController {
         String username = view.getUsernameField().getText();
         String password = new String(view.getPasswordField().getPassword());
 
-        if (username.equals("admin") && password.equals("password123")) {
+        if (username.equals("admin") && password.equals("admin")) {
             view.dispose();
             new AlertView("hello","Login Successful!");
             DashboardView dashboardView = new DashboardView();
