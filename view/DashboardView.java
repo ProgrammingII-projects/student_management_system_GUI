@@ -1,11 +1,13 @@
 package view;
 
 import javax.swing.*;
+
+import model.Student;
+
 import java.awt.*;
 
 public class DashboardView extends JFrame {
     private JButton addButton, deleteButton, searchButton, viewButton, exitButton, logoutButton;
-
     public DashboardView() {
         setTitle("Dashboard");
         setSize(400, 300);

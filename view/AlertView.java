@@ -5,12 +5,12 @@ import java.awt.*;
 
 public class AlertView {
     //you cann use this constructor if you don't need to execute any action on OK button click
-    public AlertView(String text) {
-        this(text, null);
+    public AlertView(String title ,String text) {
+        this(title ,text, null);
     }
     //you can use this constructor to execute an action on OK button click
-    public AlertView(String text, Runnable onOk) {
-        JFrame frame = new JFrame("Message");
+    public AlertView(String title, String text, Runnable onOk) {
+        JFrame frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(300, 150);
         frame.setLocationRelativeTo(null);
