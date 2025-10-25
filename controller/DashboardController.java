@@ -45,5 +45,12 @@ public class DashboardController {
         }
         new AlertView("Success", "Student added successfully!" );
     }
+    public void deleteStudent(Student student) {
+
+        if(database.contains(student.getStudentID()))
+
+
+           database.deleteStudent(student.getStudentID());
+    }
 
 }
