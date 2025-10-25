@@ -8,21 +8,10 @@ import model.*;
 public class displayStudent {
 
     private static JFrame frame;
-
-    private String Name;
-    private int studentID;
-    private int age;
-    private String gender;
-    private String department;
-    private double GPA;
+    Student student;
 
     public displayStudent(Student student) {
-        Name = student.getName();
-        studentID = student.getStudentID();
-        age = student.getAge();
-        gender = student.getGender();
-        department = student.getDepartment();
-        GPA = student.getGPA();
+        this.student = student;
         
         display();
     }
@@ -46,22 +35,22 @@ public class displayStudent {
 
         
         JLabel nameLabel = new JLabel("       Name : ");
-        JLabel nameText = new JLabel(Name);
+        JLabel nameText = new JLabel(student.getName());
 
         JLabel IDLabel = new JLabel("       ID : ");
-        JLabel IDText = new JLabel(String.valueOf(studentID));
+        JLabel IDText = new JLabel(String.valueOf(student.getStudentID()));
 
         JLabel AgeLabel = new JLabel("       Age : ");
-        JLabel AgeText = new JLabel(String.valueOf(age));
+        JLabel AgeText = new JLabel(String.valueOf(student.getAge()));
 
         JLabel GenderLabel = new JLabel("       Gender : ");
-        JLabel GenderText = new JLabel(gender);
+        JLabel GenderText = new JLabel(student.getGender());
 
         JLabel DepartmentLabel = new JLabel("       Department : ");
-        JLabel DepartmentText = new JLabel(department);
+        JLabel DepartmentText = new JLabel(student.getDepartment());
 
         JLabel GPALabel = new JLabel("       GPA : ");
-        JLabel GPAText = new JLabel(String.valueOf(GPA));
+        JLabel GPAText = new JLabel(String.valueOf(student.getGPA()));
 
 
         
@@ -95,6 +84,7 @@ public class displayStudent {
         JButton BackButton = new JButton("Back");
         
         Dimension buttonSize = new Dimension(120, 40); // standard size of buttons we will use
+        
         EditButton.setPreferredSize(buttonSize);
         DeleteButton.setPreferredSize(buttonSize);
         BackButton.setPreferredSize(buttonSize);
@@ -104,9 +94,12 @@ public class displayStudent {
         buttonPanel.add(BackButton);
 
         
-       
+        // Display the student widget (summary) above the buttons
+        studentWidget st = new studentWidget(student,frame);
+        frame.add(st.getPanel());
         frame.add(buttonPanel);
-        studentWidget.display();
+
+       
         
 
        
