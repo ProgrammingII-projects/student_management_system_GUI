@@ -5,6 +5,9 @@ import java.awt.*;
 
 public class AlertView {
     public AlertView(String text) {
+        this(text, null);
+    }
+    public AlertView(String text, Runnable onOk) {
         JFrame frame = new JFrame("Message");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(300, 150);
@@ -15,7 +18,10 @@ public class AlertView {
         panel.add(label, BorderLayout.CENTER);
 
         JButton okButton = new JButton("OK");
-        okButton.addActionListener(e -> frame.dispose());
+        okButton.addActionListener(e -> {
+            frame.dispose();
+            if(onOk != null) onOk.run();
+        });
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(okButton);
