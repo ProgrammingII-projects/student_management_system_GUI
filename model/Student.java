@@ -1,4 +1,4 @@
-package Student;
+package model;
 import utils.Generator;
 public class Student {
     private int studentID;

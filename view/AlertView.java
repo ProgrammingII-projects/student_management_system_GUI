@@ -1,30 +1,17 @@
-package utils;
+package view;
 
 import javax.swing.*;
 import java.awt.*;
 
-
-public class Alert {
-
-    public String text;
-
-    public Alert(String text)
-    {
-        this.text = text;
-        display();
-    }
-
-    public void display() {
-        JFrame frame = new JFrame(text);
+public class AlertView {
+    public AlertView(String text) {
+        JFrame frame = new JFrame("Message");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
         frame.setSize(300, 150);
         frame.setLocationRelativeTo(null);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout(10, 10));
-
-        JLabel label = new JLabel(this.text, SwingConstants.CENTER);
+        JPanel panel = new JPanel(new BorderLayout(10, 10));
+        JLabel label = new JLabel(text, SwingConstants.CENTER);
         panel.add(label, BorderLayout.CENTER);
 
         JButton okButton = new JButton("OK");

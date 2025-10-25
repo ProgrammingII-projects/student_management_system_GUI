@@ -1,6 +1,5 @@
-package database;
+package model;
 
-import Student.Student;
 import java.io.*;
 import java.util.*;
 
