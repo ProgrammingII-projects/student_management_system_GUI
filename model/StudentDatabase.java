@@ -107,11 +107,11 @@ public class StudentDatabase {
             System.out.println("Error saving to file: " + fileName);
         }
     }
-    public boolean editStudent(int id, String newFullName, int newAge, String newGender, String newDepartment,
+    public String editStudent(int id, String newFullName, int newAge, String newGender, String newDepartment,
             double newGPA) {
         String validation = Student.validateTexString(newFullName, String.valueOf(newAge), String.valueOf(newGPA));
         if (!validation.equals("OK"))
-            return false;
+            return validation;
         for (Student s : records) {
             if (s.getStudentID() == id) {
                 s.setName(newFullName);
@@ -120,9 +120,9 @@ public class StudentDatabase {
                 s.setDepartment(newDepartment);
                 s.setGPA(newGPA);
                 saveToFile();
-                return true;
+                return "OK";
             }
         }
-        return false;
+        return validation;
     }
 }
