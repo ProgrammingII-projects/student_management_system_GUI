@@ -11,7 +11,6 @@ import javax.swing.*;
 
 public class DashboardController {
     private DashboardView view;
-    private AddStudentView addStudentView;
     private StudentDatabase database;
 
     public DashboardController(DashboardView view, StudentDatabase database) {
@@ -24,7 +23,7 @@ public class DashboardController {
         view.getAddButton().addActionListener(
 
            e -> {
-                    AddStudentView addStudentView = new AddStudentView();
+                    final AddStudentView addStudentView = new AddStudentView();
                     new AddStudentController(addStudentView, database);
                 }
         );
@@ -38,33 +37,23 @@ public class DashboardController {
         });
     }
 
-    private void openSearchWindow() {
+    public void openSearchWindow() {
         SearchStudent searchView = new SearchStudent(this);
         searchView.setVisible(true);
     }
-    private void openDeleteWindow() {
+    public void openDeleteWindow() {
         DeleteStudent deleteView = new DeleteStudent(this);
         deleteView.setVisible(true);
     }
-    // methode to add student to the database
-    public void addStudent(Student student) {
-        Student s = new Student(student.getStudentID(), student.getName(), student.getAge(),
-                student.getGender(), student.getDepartment(), student.getGPA());
-        String state = database.addStudent(s);
-        if (state != "OK") {
-            new AlertView("Error", state);
-            return;
-        }
-        new AlertView("Success", "Student added successfully!");
-    }
-    public void deleteStudent(String input) {
-        if (input.isEmpty()) {
+   
+    public void deleteStudent(String ID) {
+        if (ID.isEmpty()) {
             new AlertView("Error", "Please enter a Student ID!");
             return;
         }
 
         try {
-            int id = Integer.parseInt(input);
+            int id = Integer.parseInt(ID);
 
             int confirm = JOptionPane.showConfirmDialog(
                     null,
@@ -86,18 +75,18 @@ public class DashboardController {
         }
     }
 
-    public void searchStudent(String input) {
-        if (input.isEmpty()) {
+    public void searchStudent(String ID) {
+        if (ID.isEmpty()) {
             new AlertView("Error", "Please enter a Student ID!");
             return;
         }
 
         try {
-            int id = Integer.parseInt(input);
+            int id = Integer.parseInt(ID);
             Student student = database.searchStudent(id);
 
             if (student != null) {
-               new DisplayStudent(student);
+               new DisplayStudent(student,this);
 
             } else {
                 new AlertView("Error", "Student not found!");
@@ -106,6 +95,19 @@ public class DashboardController {
             new AlertView("Error", "Student ID must be a number!");
         }
     }
+    public void editStudent(int id, String name, int age, String gender, String department, double gpa) {
+        boolean updated = database.editStudent(id, name, age, gender, department, gpa);
+
+        if (updated) {
+            new AlertView("Success", "Student details updated successfully!");
+        } else {
+            new AlertView("Error", "Failed to update student. Please check the ID and inputs!");
+        }
+    }
+    public StudentDatabase getDatabase() {
+        return database;
+    }
+
 }
 
 

@@ -3,6 +3,8 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
+import controller.EditStudentController;
 import model.*;
 
 public class DisplayStudent {
@@ -10,7 +12,8 @@ public class DisplayStudent {
     private static JFrame frame;
     Student student;
 
-    public DisplayStudent(Student student) {
+
+    public DisplayStudent(Student student, DashboardController controller) {
         this.student = student;
         
         display();
@@ -33,7 +36,7 @@ public class DisplayStudent {
 
         frame.setLayout(new GridLayout(7,2 , 5, 1));
 
-        
+
         JLabel nameLabel = new JLabel("       Name : ");
         JLabel nameText = new JLabel(student.getName());
 
@@ -53,7 +56,7 @@ public class DisplayStudent {
         JLabel GPAText = new JLabel(String.valueOf(student.getGPA()));
 
 
-        
+
         frame.add(nameLabel);
         frame.add(nameText);
 
@@ -74,51 +77,50 @@ public class DisplayStudent {
 
 
 
-        
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 30));
-        
-        
+
+
         JButton EditButton = new JButton("Edit Student");
         JButton DeleteButton = new JButton("Delete student");
         JButton BackButton = new JButton("Back");
-        
+
         Dimension buttonSize = new Dimension(120, 40); // standard size of buttons we will use
         EditButton.setPreferredSize(buttonSize);
         DeleteButton.setPreferredSize(buttonSize);
         BackButton.setPreferredSize(buttonSize);
-        
+
         buttonPanel.add(EditButton);
         buttonPanel.add(DeleteButton);
         buttonPanel.add(BackButton);
 
-        /* 
+        /*
         // Display the student widget (summary) above the buttons
         studentWidget st = new studentWidget(student);
         frame.add(st.getPanel());
 
-        */
+
+       */
         frame.add(buttonPanel);
 
-       
-        
 
-       
-        EditButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new AlertView("Under construction.....", null);
-            }
+
+        EditButton.addActionListener(e -> {
+            frame.dispose(); // close current display
+            EditStudentView editView = new EditStudentView(student);
+            new EditStudentController(editView, controller.getDatabase()); // use same DB
         });
 
-        DeleteButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new AlertView("Under construction.....",null);
-            }
+
+        DeleteButton.addActionListener(e -> {
+                controller.deleteStudent(String.valueOf(student.getStudentID()));
+                frame.dispose(); // close after delete
         });
 
         BackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new AlertView("Under construction.....", null);
+               frame.dispose();
             }
         });
 
