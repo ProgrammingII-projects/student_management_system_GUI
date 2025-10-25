@@ -2,20 +2,18 @@ package view;
 
 import javax.swing.*;
 import java.awt.event.*;
-
-import model.Student;
-import model.StudentDatabase;
+import controller.DashboardController;
 
 public class SearchStudent extends JFrame {
     private JTextField studentIdField;
     private JButton searchButton;
-    private StudentDatabase database;
+    private DashboardController controller;
 
-    public SearchStudent(StudentDatabase database) {
-        this.database = database;
+    public SearchStudent(DashboardController controller) {
+        this.controller = controller;
 
         setTitle("Search Student");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(350, 180);
         setLayout(null);
         setLocationRelativeTo(null);
@@ -32,47 +30,13 @@ public class SearchStudent extends JFrame {
         searchButton.setBounds(110, 80, 120, 30);
         add(searchButton);
 
-        // Action listener for search
+        // Send the search request to the controller
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String input = studentIdField.getText().trim();
-
-                if (input.isEmpty()) {
-                    new AlertView("Error", "Please enter a Student ID!");
-                    return;
-                }
-
-                try {
-                    int id = Integer.parseInt(input);
-                    Student student = database.searchStudent(id);
-
-                    if (student != null) {
-                        JOptionPane.showMessageDialog(
-                                null,
-                                "Student Found:\n\n" +
-                                        "ID: " + student.getStudentID() + "\n" +
-                                        "Name: " + student.getName() + "\n" +
-                                        "Age: " + student.getAge() + "\n" +
-                                        "Gender: " + student.getGender() + "\n" +
-                                        "Department: " + student.getDepartment() + "\n" +
-                                        "GPA: " + student.getGPA(),
-                                "Search Result",
-                                JOptionPane.INFORMATION_MESSAGE
-                        );
-                    } else {
-                        new AlertView("Error", "Student not found!");
-                    }
-
-                } catch (NumberFormatException ex) {
-                    new AlertView("Error", "Student ID must be a number!");
-                }
+                controller.searchStudent(input);
             }
         });
-    }
-
-    public static void main(String[] args) {
-        StudentDatabase db = new StudentDatabase("model/students.txt");
-        SwingUtilities.invokeLater(() -> new SearchStudent(db).setVisible(true));
     }
 }

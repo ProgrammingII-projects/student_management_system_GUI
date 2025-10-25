@@ -12,5 +12,6 @@ public class Main {
 
         DashboardView dashboardView = new DashboardView();
         new DashboardController(dashboardView, database);
+
     }
 }
