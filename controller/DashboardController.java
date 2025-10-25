@@ -23,7 +23,7 @@ public class DashboardController {
         view.getAddButton().addActionListener(
 
            e -> {
-                    AddStudentView addStudentView = new AddStudentView();
+                    final AddStudentView addStudentView = new AddStudentView();
                     new AddStudentController(addStudentView, database);
                 }
         );
