@@ -1,4 +1,4 @@
-package Student;
+package model;
 import utils.Generator;
 public class Student {
     private int studentID;
@@ -73,8 +73,8 @@ public class Student {
     }
 
 
-     public static String validateTexString(String name, String ageStr, String gpaAsString) {
-        if (name == null || name.trim().isEmpty())
+     public static String validateTexString(String studentName, String ageStr, String gpaAsString) {
+        if (studentName == null || studentName.trim().isEmpty())
             return "Name cannot be empty";
 
         int age;
@@ -95,7 +95,7 @@ public class Student {
             return "GPA must be a valid number";
         }
 
-        return "OK"; // everything is valid
+        return "OK"; // everything is valid except department and gender and alraedy id is generated in GUI
     }
     
 }

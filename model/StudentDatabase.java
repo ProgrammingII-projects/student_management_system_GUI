@@ -1,6 +1,5 @@
-package database;
+package model;
 
-import Student.Student;
 import java.io.*;
 import java.util.*;
 
@@ -62,19 +61,23 @@ public class StudentDatabase {
         }
     }
 
-    public void addStudent(Student student) {
-        for (Student s : records) {
-            if (s.getStudentID() == student.getStudentID())
-                    student.setStudentID(new Random().nextInt(1000) + 1);
-                return;
-        }
+    // di btrabta3 goz2 mn el validation hena ba2i validation hayeb2a fi GUI we el controllers
+    public String addStudent(Student student) {
+        String validation = Student.validateTexString(student.getName(), String.valueOf(student.getAge()), String.valueOf(student.getGPA()));
+        if(validation != "OK")
+            return validation;
         records.add(student);
         saveToFile();
+        return "OK";
     }
 
-    public void deleteStudent(int id) {
+    public boolean deleteStudent(int id) {
+        if (!contains(id))
+            return false;
+
         records.removeIf(student -> student.getStudentID() == id);
         saveToFile();
+        return true;
     }
 
     public boolean contains(int id) {
@@ -103,7 +106,6 @@ public class StudentDatabase {
             System.out.println("Error saving to file: " + fileName);
         }
     }
-
     public boolean editStudent(int id, String newFullName, int newAge, String newGender, String newDepartment,
             double newGPA) {
         String validation = Student.validateTexString(newFullName, String.valueOf(newAge), String.valueOf(newGPA));
