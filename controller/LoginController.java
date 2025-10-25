@@ -25,11 +25,11 @@ public class LoginController {
 
         if (username.equals("admin") && password.equals("password123")) {
             view.dispose();
-            new AlertView("Login Successful!");
+            new AlertView("hello","Login Successful!");
             DashboardView dashboardView = new DashboardView();
             new DashboardController(dashboardView, database);
         } else {
-            new AlertView("Invalid Username or Password!");
+            new AlertView("hello","Invalid Username or Password!");
         }
     }
 }
