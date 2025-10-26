@@ -1,10 +1,8 @@
 package main;
 
 import controller.DashboardController;
-import controller.LoginController;
 import model.StudentDatabase;
 import view.DashboardView;
-import view.LoginView;
 
 public class Main {
     public static void main(String[] args) {

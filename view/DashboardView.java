@@ -1,9 +1,6 @@
 package view;
 
 import javax.swing.*;
-
-import model.Student;
-
 import java.awt.*;
 
 public class DashboardView extends JFrame {
