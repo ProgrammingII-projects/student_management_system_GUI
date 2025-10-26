@@ -1,4 +1,5 @@
 package model;
+
 public class Student {
     private int studentID;
     private String name;
@@ -6,7 +7,8 @@ public class Student {
     private String gender;
     private String department;
     private double GPA;
-   // private StudentDatabase studentDatabase = new StudentDatabase("Student/students.txt");
+    // private StudentDatabase studentDatabase = new
+    // StudentDatabase("Student/students.txt");
 
     public Student(int studentID, String name, int age, String gender, String department, double GPA) {
         setStudentID(studentID);
@@ -71,10 +73,11 @@ public class Student {
         return studentID + "," + name + "," + age + "," + gender + "," + department + "," + GPA;
     }
 
-
-     public static String validateTexString(String studentName, String ageStr, String gpaAsString) {
-        if (studentName == null || studentName.trim().isEmpty() || !(studentName instanceof String))
-            return "Name cannot be empty and must be a valid string";
+    public static String validateTexString(String studentName, String ageStr, String gpaAsString) {
+        if (studentName == null || studentName.trim().isEmpty())
+            return "Name cannot be empty";
+        if (!studentName.matches("[a-zA-Z ]+"))
+            return "Name must contain only letters and spaces";
 
         int age;
         try {
@@ -94,7 +97,8 @@ public class Student {
             return "GPA must be a valid number";
         }
 
-        return "OK"; // everything is valid except department and gender and alraedy id is generated in GUI
+        return "OK"; // everything is valid except department and gender and alraedy id is generated
+                     // in GUI
     }
-    
+
 }
