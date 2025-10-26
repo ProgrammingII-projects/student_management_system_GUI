@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public abstract class BaseReusableView extends JFrame {
+    
     protected JLabel titleLabel, nameLabel, ageLabel, genderLabel, departmentLabel, gpaLabel, idLabel;
     protected JTextField idField, nameField, ageField, gpaField;
     protected JComboBox<String> genderField, departmentField;
