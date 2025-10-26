@@ -15,10 +15,10 @@ public class DisplayStudent {
     private static JFrame frame;
     private Student student;
     private DashboardController controller;
-    Boolean flag = false;
+    int flag = 0;
 
 
-    public DisplayStudent(Student student, DashboardController controller,Boolean flag) {
+    public DisplayStudent(Student student, DashboardController controller,int flag) {
         this.student = student;
         this.controller = controller;
         this.flag=flag;
@@ -37,7 +37,7 @@ public class DisplayStudent {
     public void display() {
 
         frame = new JFrame("display student");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(1000, 600);
 
         frame.setLayout(new GridLayout(7,2 , 5, 1));
@@ -124,16 +124,20 @@ public class DisplayStudent {
         DeleteButton.addActionListener(e -> {
                 controller.deleteStudent(String.valueOf(student.getStudentID()));
                 frame.dispose(); // close after delete
-                if(flag){
+                if(flag == 1){
                 TableTemplate t = new TableTemplate(controller); 
                 t.display("Delete ❌");
+                }
+                else if(flag==2){
+                    TableTemplate t = new TableTemplate(controller); 
+                    t.display("Show 🔎");
         }
         });
 
         BackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
-                if(flag){
+                if(flag==2){
                     TableTemplate t = new TableTemplate(controller); 
                     t.display("Show 🔎");
             }

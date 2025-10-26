@@ -85,7 +85,7 @@ public class TableTemplate extends JFrame {
                         }
                         else{
                         frame.dispose();
-                        new DisplayStudent(students.get(currentRow), controller,true);
+                        new DisplayStudent(students.get(currentRow), controller,2);
                         }
                     }
                     fireEditingStopped(); 

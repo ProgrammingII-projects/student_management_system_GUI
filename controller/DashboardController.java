@@ -94,7 +94,7 @@ public class DashboardController {
             Student student = database.searchStudent(id);
 
             if (student != null) {
-               new DisplayStudent(student,this,false);
+               new DisplayStudent(student,this,0);
 
             } else {
                 new AlertView("Error", "Student not found!");
