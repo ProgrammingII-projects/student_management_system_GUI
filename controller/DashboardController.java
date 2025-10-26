@@ -44,6 +44,7 @@ public class DashboardController {
 
     public void OpenViewWindow() {
         TableTemplate StudentView = new TableTemplate(this);
+        StudentView.display();
         
     }
 

@@ -133,6 +133,10 @@ public class DisplayStudent {
         BackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
+                if(flag){
+                    TableTemplate t = new TableTemplate(controller); 
+                    t.display();
+            }
             }
         });
 

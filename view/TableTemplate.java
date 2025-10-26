@@ -32,8 +32,8 @@ public class TableTemplate extends JFrame {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Add "Action" column with button in each row
-        String[] columns = { "ID", "Name", "Age", "Gender", "Department", "Action" };
-        Object[][] rows = new Object[students.size()][6];
+        String[] columns = { "ID", "Name", "Age", "Gender", "Department", "GPA", "Action" };
+        Object[][] rows = new Object[students.size()][7];
 
         for (int i = 0; i < students.size(); i++) {
             Student s = students.get(i);
@@ -42,12 +42,13 @@ public class TableTemplate extends JFrame {
             rows[i][2] = s.getAge();
             rows[i][3] = s.getGender();
             rows[i][4] = s.getDepartment();
-            rows[i][5] = "Show 🔎";  // Placeholder value for button
+            rows[i][5] = s.getGPA();
+            rows[i][6] = "Show 🔎";  // Placeholder value for button
         }
 
         JTable table = new JTable(rows, columns) {
             public boolean isCellEditable(int row, int column) {
-                return column == 5; // Only "Action" column is editable
+                return column == 6; // Only "Action" column is editable
             }
         };
 
