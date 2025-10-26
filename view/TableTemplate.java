@@ -67,7 +67,6 @@ public class TableTemplate extends JFrame {
         class ButtonEditor extends DefaultCellEditor {
             private JButton button;
             private int currentRow = -1;
-            private JTable tableRef;
 
             
             public ButtonEditor() {
@@ -83,6 +82,7 @@ public class TableTemplate extends JFrame {
                         TableTemplate t = new TableTemplate(controller);
                         t.display(text);
                         }
+
                         else{
                         frame.dispose();
                         new DisplayStudent(students.get(currentRow), controller,2);
@@ -95,7 +95,6 @@ public class TableTemplate extends JFrame {
             @Override
             public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
                 currentRow = row;
-                tableRef = table;
                 return button;
             }
 
