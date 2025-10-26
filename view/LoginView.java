@@ -22,7 +22,25 @@ public class LoginView extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new GridBagLayout());
         getContentPane().setBackground(new Color(10, 25, 74));
-        add(CloseButton.create(this));
+        
+        // Add CloseButton to the top-right corner (increase button size)
+        JPanel closePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+        closePanel.setOpaque(false);
+
+        JButton closeButton = CloseButton.create(this);
+        closeButton.setPreferredSize(new Dimension(50, 35)); // Increased size
+        closeButton.setFont(new Font("Segoe UI", Font.BOLD, 20)); // Larger font for button
+        closePanel.add(closeButton);
+
+        GridBagConstraints closeGbc = new GridBagConstraints();
+        closeGbc.gridx = 1;
+        closeGbc.gridy = 0;
+        closeGbc.anchor = GridBagConstraints.NORTHEAST;
+        closeGbc.weightx = 1;
+        closeGbc.weighty = 1;
+        closeGbc.insets = new Insets(5, 5, 0, 5);
+        add(closePanel, closeGbc);
+
 
 
 
