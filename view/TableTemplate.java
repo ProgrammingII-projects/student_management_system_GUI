@@ -1,9 +1,11 @@
 package view;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import javax.swing.*;
-import javax.swing.table.TableCellRenderer;
+import javax.swing.table.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import controller.DashboardController;
 import java.awt.*;
 import javax.swing.event.DocumentEvent;
@@ -14,19 +16,16 @@ import java.util.List;
 
 public class TableTemplate extends JFrame {
 
-    StudentDatabase database = new StudentDatabase("model/students.txt");
+    private StudentDatabase database = new StudentDatabase("model/students.txt");
     private DashboardController controller;
 
-    public TableTemplate(DashboardController controller)
-    {
+    public TableTemplate(DashboardController controller) {
         this.controller = controller;
     }
 
-    private Object[][] prepareRows(List <Student> students , String text) {
-       
+    private Object[][] prepareRows(List<Student> students, String text) {
         Object[][] rows = new Object[students.size()][7];
-
-        for (int i=0 ; i<students.size() ; i++) {
+        for (int i = 0; i < students.size(); i++) {
             Student s = students.get(i);
             rows[i][0] = s.getStudentID();
             rows[i][1] = s.getName();
@@ -34,74 +33,127 @@ public class TableTemplate extends JFrame {
             rows[i][3] = s.getGender();
             rows[i][4] = s.getDepartment();
             rows[i][5] = s.getGPA();
-            rows[i][6] = text;  // Placeholder value for button
+            rows[i][6] = text;
         }
         return rows;
     }
 
-    public void display(String text){
-        
+    public void display(String text) {
+
         ArrayList<Student> students = database.getRecords();
 
-        JFrame frame = new JFrame("Simple Swing Table");
+        JFrame frame = new JFrame("Student Management - " + text);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(1000, 500);
+        frame.setLocationRelativeTo(null);
+        frame.getContentPane().setBackground(new Color(10, 25, 74));
+        frame.setLayout(new BorderLayout());
 
-        // ===== Add Search Panel =====
+        // ======== SEARCH BAR PANEL ========
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        searchPanel.setBackground(new Color(10, 25, 74));
         JLabel searchLabel = new JLabel("Search by ID:");
+        searchLabel.setForeground(Color.WHITE);
+        searchLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
+
         JTextField searchField = new JTextField(15);
+        searchField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        searchField.setBackground(new Color(25, 50, 120));
+        searchField.setForeground(Color.WHITE);
+        searchField.setCaretColor(Color.WHITE);
+        searchField.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+
         searchPanel.add(searchLabel);
         searchPanel.add(searchField);
 
-        // Add "Action" column with button in each row
-        String[] columns = { "ID", "Name", "Age", "Gender", "Department", "GPA", "Action" };
+        // ======== TABLE SETUP ========
+        String[] columns = {"ID", "Name", "Age", "Gender", "Department", "GPA", "Action"};
         Object[][] rows = prepareRows(students, text);
 
         JTable table = new JTable(rows, columns) {
             public boolean isCellEditable(int row, int column) {
-                return column == 6; // Only "Action" column is editable
+                return column == 6;
             }
         };
 
-        // Button renderer for the "Action" column
-        table.getColumn("Action").setCellRenderer(new TableCellRenderer() {
+        // ======== TABLE STYLE ========
+        table.setBackground(new Color(15, 35, 90));
+        table.setForeground(Color.WHITE);
+        table.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        table.setRowHeight(35);
+        table.setGridColor(new Color(40, 60, 120));
+        table.setSelectionBackground(new Color(30, 60, 130));
+        table.setSelectionForeground(Color.WHITE);
+
+        JTableHeader header = table.getTableHeader();
+        header.setBackground(new Color(20, 40, 100));
+        header.setForeground(Color.WHITE);
+        header.setFont(new Font("Segoe UI", Font.BOLD, 15));
+        header.setReorderingAllowed(false);
+
+        // Alternate row color
+        DefaultTableCellRenderer alternate = new DefaultTableCellRenderer() {
             @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                JButton button = new JButton(text);
-                if (isSelected) {
-                    button.setBackground(table.getSelectionBackground());
-                    button.setForeground(table.getSelectionForeground());
-                } else {
-                    button.setBackground(UIManager.getColor("Button.background"));
-                    button.setForeground(table.getForeground());
+            public Component getTableCellRendererComponent(
+                    JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                if (!isSelected) {
+                    c.setBackground(row % 2 == 0 ? new Color(20, 45, 110) : new Color(25, 50, 120));
+                    c.setForeground(Color.WHITE);
                 }
-                return button;
+                return c;
             }
+        };
+        for (int i = 0; i < table.getColumnCount() - 1; i++) {
+            table.getColumnModel().getColumn(i).setCellRenderer(alternate);
+        }
+
+        // ======== BUTTON RENDERER ========
+        table.getColumn("Action").setCellRenderer((tbl, value, isSelected, hasFocus, row, col) -> {
+            JButton button = new JButton(text);
+            button.setFont(new Font("Segoe UI", Font.BOLD, 13));
+            button.setForeground(Color.WHITE);
+            button.setFocusPainted(false);
+            button.setBorder(BorderFactory.createEmptyBorder());
+            button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+            if (text.equals("Delete ❌")) {
+                button.setBackground(new Color(204, 0, 0));
+            } else {
+                button.setBackground(new Color(0, 153, 51));
+            }
+            if (isSelected) button.setBackground(button.getBackground().darker());
+            return button;
         });
         
 
-        // Button editor for the "Action" column
+        // ======== BUTTON EDITOR ========
         class ButtonEditor extends DefaultCellEditor {
             private JButton button;
             private int currentRow = -1;
             private List<Student> currentStudents;
 
             public ButtonEditor(List<Student> currentStudents) {
-                super(new JCheckBox()); // required per DefaultCellEditor constructor
+                super(new JCheckBox());
                 this.currentStudents = currentStudents;
                 button = new JButton(text);
+                button.setFont(new Font("Segoe UI", Font.BOLD, 13));
+                button.setForeground(Color.WHITE);
+                button.setFocusPainted(false);
+                button.setBorder(BorderFactory.createEmptyBorder());
+                button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                button.setBackground(text.equals("Delete ❌") ? new Color(204, 0, 0) : new Color(0, 153, 51));
+
                 button.addActionListener(e -> {
                     if (currentRow >= 0 && currentRow < currentStudents.size()) {
-                        if (text.equals("Delete ❌"))
-                        {
+                        if (text.equals("Delete ❌")) {
                             frame.dispose();
                             controller.deleteStudent(String.valueOf(currentStudents.get(currentRow).getStudentID()));
                             TableTemplate t = new TableTemplate(controller);
                             t.display(text);
-                        }
-                        else{
+                        } else {
                             frame.dispose();
-                            new DisplayStudent(currentStudents.get(currentRow), controller,2);
+                            new DisplayStudent(currentStudents.get(currentRow), controller, 2);
                         }
                     }
                     fireEditingStopped();
@@ -122,8 +174,7 @@ public class TableTemplate extends JFrame {
 
         table.getColumn("Action").setCellEditor(new ButtonEditor(students));
 
-//**********************Dynamic Filtering *********************8
-
+        // ======== DYNAMIC SEARCH ========
         searchField.getDocument().addDocumentListener(new DocumentListener() {
             private void filterAndUpdate() {
                 String input = searchField.getText().trim();
@@ -133,72 +184,62 @@ public class TableTemplate extends JFrame {
                 } else {
                     filtered = new ArrayList<>();
                     for (Student s : students) {
-                        String idStr = String.valueOf(s.getStudentID());
-                        if (idStr.startsWith(input)) {
+                        if (String.valueOf(s.getStudentID()).startsWith(input)) {
                             filtered.add(s);
                         }
                     }
-                }              
+                }
+
                 Object[][] newRows = prepareRows(filtered, text);
-                table.setModel(new javax.swing.table.DefaultTableModel(newRows, columns) {
+                DefaultTableModel newModel = new DefaultTableModel(newRows, columns) {
                     public boolean isCellEditable(int row, int column) {
                         return column == 6;
                     }
-                });
+                };
+                table.setModel(newModel);
 
-                // Re-apply renderer/editor to new Action column
-                table.getColumn("Action").setCellRenderer(new TableCellRenderer() {
-                    @Override
-                    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                        JButton button = new JButton(text);
-                        if (isSelected) {
-                            button.setBackground(table.getSelectionBackground());
-                            button.setForeground(table.getSelectionForeground());
-                        } else {
-                            button.setBackground(UIManager.getColor("Button.background"));
-                            button.setForeground(table.getForeground());
-                        }
-                        return button;
-                    }
+                // re-apply renderer/editor
+                for (int i = 0; i < table.getColumnCount() - 1; i++) {
+                    table.getColumnModel().getColumn(i).setCellRenderer(alternate);
+                }
+                table.getColumn("Action").setCellRenderer((tbl, val, sel, foc, r, c) -> {
+                    JButton button = new JButton(text);
+                    button.setFont(new Font("Segoe UI", Font.BOLD, 13));
+                    button.setForeground(Color.WHITE);
+                    button.setFocusPainted(false);
+                    button.setBorder(BorderFactory.createEmptyBorder());
+                    button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                    button.setBackground(text.equals("Delete ❌") ? new Color(204, 0, 0) : new Color(0, 153, 51));
+                    if (sel) button.setBackground(button.getBackground().darker());
+                    return button;
                 });
                 table.getColumn("Action").setCellEditor(new ButtonEditor(filtered));
             }
 
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                filterAndUpdate();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                filterAndUpdate();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                filterAndUpdate();
-            }
+            @Override public void insertUpdate(DocumentEvent e) { filterAndUpdate(); }
+            @Override public void removeUpdate(DocumentEvent e) { filterAndUpdate(); }
+            @Override public void changedUpdate(DocumentEvent e) { filterAndUpdate(); }
         });
-        // *****************************
 
-        //back button
+        // ======== BACK BUTTON ========
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        bottomPanel.setBackground(new Color(10, 25, 74));
 
-        JPanel bottomPanel = new JPanel();
         JButton backButton = new JButton("Back");
-        bottomPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        backButton.setPreferredSize(new Dimension(120, 35));
+        backButton.setBackground(new Color(204, 0, 0));
+        backButton.setForeground(Color.WHITE);
+        backButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        backButton.setFocusPainted(false);
+        backButton.setBorder(BorderFactory.createEmptyBorder());
+        backButton.addActionListener(e -> frame.dispose());
+
         bottomPanel.add(backButton);
 
-        backButton.addActionListener(e -> {
-            frame.dispose();
-        });
-
-        frame.setLayout(new BorderLayout());
-        frame.add(searchPanel, BorderLayout.NORTH); // Add searchPanel to the top
-
+        // ======== ADD COMPONENTS ========
+        frame.add(searchPanel, BorderLayout.NORTH);
         frame.add(new JScrollPane(table), BorderLayout.CENTER);
         frame.add(bottomPanel, BorderLayout.SOUTH);
-
-        frame.setSize(1000, 400);
         frame.setVisible(true);
     }
 }

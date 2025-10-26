@@ -34,6 +34,8 @@ public class DashboardController {
         view.getLogoutButton().addActionListener(e -> {
             view.dispose();
             new AlertView("hello", "Logged out successfully!");
+            LoginView loginView = new LoginView();
+            new LoginController(loginView, database);
         });
     }
 

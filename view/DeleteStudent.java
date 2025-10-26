@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import controller.DashboardController;
 
@@ -9,85 +10,132 @@ public class DeleteStudent extends JFrame {
     private JButton deleteButton;
     private DashboardController controller;
 
+    // ===== Theme Constants (matches BaseReusableView) =====
+    private final Color BACKGROUND_COLOR = new Color(10, 25, 74);
+    private final Color TEXT_COLOR = Color.WHITE;
+    private final Color FIELD_BG_COLOR = new Color(20, 40, 100);
+    private final Color FIELD_BORDER_COLOR = new Color(100, 150, 255);
+    private final Font MAIN_FONT = new Font("Segoe UI", Font.PLAIN, 14);
+    private final Font TITLE_FONT = new Font("Segoe UI", Font.BOLD, 18);
+
     public DeleteStudent(DashboardController controller) {
         this.controller = controller;
         MethodChoose();
     }
 
+    public void MethodChoose() {
+        getContentPane().removeAll();
+        getContentPane().setBackground(BACKGROUND_COLOR);
+        setLayout(null);
 
-    public void MethodChoose(){
+        JLabel title = new JLabel("Choose Delete Method", SwingConstants.CENTER);
+        title.setFont(TITLE_FONT);
+        title.setForeground(new Color(173, 216, 255));
+        title.setBounds(0, 10, 350, 30);
+        add(title);
 
-    JButton IDButton = new JButton("Delete by ID");
-    JButton ChooseDeleteButton = new JButton("Delete from List");
+        JButton IDButton = new JButton("Delete by ID");
+        JButton ChooseDeleteButton = new JButton("Delete from List");
 
-    IDButton.setBounds(30, 30, 130, 35);
-    ChooseDeleteButton.setBounds(170, 30, 130, 35);
+        styleButton(IDButton, new Color(0, 102, 204));
+        styleButton(ChooseDeleteButton, new Color(0, 153, 51));
 
-    setTitle("Choose Delete Method");
-    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    setSize(350, 130);
-    setLayout(null);
-    setLocationRelativeTo(null);
+        IDButton.setBounds(40, 60, 120, 35);
+        ChooseDeleteButton.setBounds(190, 60, 120, 35);
 
-    add(IDButton);
-    add(ChooseDeleteButton);
+        add(IDButton);
+        add(ChooseDeleteButton);
 
-    IDButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+        setTitle("Choose Delete Method");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(370, 160);
+        setLocationRelativeTo(null);
+        setVisible(true);
+
+        // ===== Actions =====
+        IDButton.addActionListener(e -> {
             dispose();
             SearchDelete();
             setVisible(true);
-        }
-    });
+        });
 
-    ChooseDeleteButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-           dispose();    
-            TableTemplate t = new TableTemplate(controller); 
-            t.display("Delete ❌");
-        }
-    });
-
-    setVisible(true);
+        ChooseDeleteButton.addActionListener(e -> {
+            dispose();
+            TableTemplate t = new TableTemplate(controller);
+            t.display("Delete ");
+        });
     }
 
-
-    public void SearchDelete(){
+    public void SearchDelete() {
         getContentPane().removeAll();
-        revalidate();                  
-        repaint();   
+        getContentPane().setBackground(BACKGROUND_COLOR);
+        revalidate();
+        repaint();
 
         setTitle("Delete Student");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(350, 180);
+        setSize(380, 220);
         setLayout(null);
         setLocationRelativeTo(null);
 
         JLabel label = new JLabel("Enter Student ID:");
-        label.setBounds(30, 30, 120, 25);
+        label.setForeground(TEXT_COLOR);
+        label.setFont(MAIN_FONT);
+        label.setBounds(40, 50, 150, 25);
         add(label);
 
         studentIdField = new JTextField();
-        studentIdField.setBounds(150, 30, 150, 25);
+        studentIdField.setBounds(180, 50, 150, 25);
+        styleTextField(studentIdField);
         add(studentIdField);
 
         deleteButton = new JButton("Delete");
-        deleteButton.setBounds(110, 80, 120, 30);
+        styleButton(deleteButton, new Color(204, 0, 0));
+        deleteButton.setBounds(120, 110, 120, 35);
         add(deleteButton);
 
-        deleteButton.addActionListener(new ActionListener() {
+        deleteButton.addActionListener(e -> {
+            String input = studentIdField.getText().trim();
+            controller.deleteStudent(input);
+            dispose();
+        });
+
+        setVisible(true);
+    }
+
+    // ===== Utility Styling Methods =====
+    private void styleButton(JButton button, Color bgColor) {
+        button.setBackground(bgColor);
+        button.setForeground(Color.WHITE);
+        button.setFocusPainted(false);
+        button.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        button.setBorder(BorderFactory.createEmptyBorder());
+
+        // Optional: hover effect
+        button.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                String input = studentIdField.getText().trim();
-                controller.deleteStudent(input);
-                dispose();
+            public void mouseEntered(MouseEvent e) {
+                button.setBackground(bgColor.brighter());
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setBackground(bgColor);
             }
         });
     }
 
+    private void styleTextField(JTextField field) {
+        field.setBackground(FIELD_BG_COLOR);
+        field.setForeground(TEXT_COLOR);
+        field.setCaretColor(TEXT_COLOR);
+        field.setBorder(BorderFactory.createLineBorder(FIELD_BORDER_COLOR));
+        field.setFont(MAIN_FONT);
+    }
+
     public void prefillStudentId(String id) {
-        studentIdField.setText(id);
+        if (studentIdField != null) {
+            studentIdField.setText(id);
+        }
     }
 }
