@@ -62,10 +62,12 @@ public class StudentDatabase {
         }
     }
 
-    // di btrabta3 goz2 mn el validation hena ba2i validation hayeb2a fi GUI we el controllers
+    // di btzabat goz2 mn el validation hena ba2i el validation hayeb2a fi GUI we el
+    // controllers
     public String addStudent(Student student) {
-        String validation = Student.validateTexString(student.getName(), String.valueOf(student.getAge()), String.valueOf(student.getGPA()));
-        if(validation != "OK")
+        String validation = Student.validateTexString(student.getName(), String.valueOf(student.getAge()),
+                String.valueOf(student.getGPA()));
+        if (validation != "OK")
             return validation;
         records.add(student);
         saveToFile();
@@ -107,6 +109,7 @@ public class StudentDatabase {
             System.out.println("Error saving to file: " + fileName);
         }
     }
+
     public boolean editStudent(int id, String newFullName, int newAge, String newGender, String newDepartment,
             double newGPA) {
         String validation = Student.validateTexString(newFullName, String.valueOf(newAge), String.valueOf(newGPA));
