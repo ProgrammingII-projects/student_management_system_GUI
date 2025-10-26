@@ -126,7 +126,7 @@ public class DisplayStudent {
                 frame.dispose(); // close after delete
                 if(flag){
                 TableTemplate t = new TableTemplate(controller); 
-                t.display();
+                t.display("Delete ❌");
         }
         });
 
@@ -135,7 +135,7 @@ public class DisplayStudent {
                 frame.dispose();
                 if(flag){
                     TableTemplate t = new TableTemplate(controller); 
-                    t.display();
+                    t.display("Show 🔎");
             }
             }
         });

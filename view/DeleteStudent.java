@@ -46,7 +46,7 @@ public class DeleteStudent extends JFrame {
         public void actionPerformed(ActionEvent e) {
            dispose();    
             TableTemplate t = new TableTemplate(controller); 
-            t.displayDelete();
+            t.display("Delete ❌");
         }
     });
 
