@@ -22,10 +22,11 @@ public class TableTemplate extends JFrame {
         this.controller = controller;
     }
 
-    private Object[][] prepareRows(List<Student> students, String text) {
+    private Object[][] prepareRows(List <Student> students , String text) {
        
         Object[][] rows = new Object[students.size()][7];
-        for (int i = 0; i < students.size(); i++) {
+
+        for (int i=0 ; i<students.size() ; i++) {
             Student s = students.get(i);
             rows[i][0] = s.getStudentID();
             rows[i][1] = s.getName();
@@ -121,7 +122,8 @@ public class TableTemplate extends JFrame {
 
         table.getColumn("Action").setCellEditor(new ButtonEditor(students));
 
-        // ==================== Dynamic Filtering ======================
+//**********************Dynamic Filtering *********************8
+
         searchField.getDocument().addDocumentListener(new DocumentListener() {
             private void filterAndUpdate() {
                 String input = searchField.getText().trim();
@@ -136,13 +138,14 @@ public class TableTemplate extends JFrame {
                             filtered.add(s);
                         }
                     }
-                }
+                }              
                 Object[][] newRows = prepareRows(filtered, text);
                 table.setModel(new javax.swing.table.DefaultTableModel(newRows, columns) {
                     public boolean isCellEditable(int row, int column) {
                         return column == 6;
                     }
                 });
+
                 // Re-apply renderer/editor to new Action column
                 table.getColumn("Action").setCellRenderer(new TableCellRenderer() {
                     @Override
@@ -176,9 +179,10 @@ public class TableTemplate extends JFrame {
                 filterAndUpdate();
             }
         });
-        // ==================== End Dynamic Filtering ==================
+        // *****************************
 
-        // ===== Add Back Button =====
+        //back button
+
         JPanel bottomPanel = new JPanel();
         JButton backButton = new JButton("Back");
         bottomPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -190,6 +194,7 @@ public class TableTemplate extends JFrame {
 
         frame.setLayout(new BorderLayout());
         frame.add(searchPanel, BorderLayout.NORTH); // Add searchPanel to the top
+
         frame.add(new JScrollPane(table), BorderLayout.CENTER);
         frame.add(bottomPanel, BorderLayout.SOUTH);
 
