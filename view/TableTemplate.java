@@ -8,11 +8,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import controller.DashboardController;
 import java.awt.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import model.Student;
 import model.StudentDatabase;
-import java.util.List;
 
 public class TableTemplate extends JFrame {
 

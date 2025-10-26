@@ -7,7 +7,6 @@ import view.*;
 import model.Student;
 import model.StudentDatabase;
 
-import javax.swing.*;
 
 public class DashboardController {
     private DashboardView view;

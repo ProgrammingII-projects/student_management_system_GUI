@@ -2,7 +2,6 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import controller.DashboardController;
 
 public class DeleteStudent extends JFrame {

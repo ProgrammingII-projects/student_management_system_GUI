@@ -114,6 +114,11 @@ public class LoginView extends JFrame {
         setVisible(true);
     }
 
+    public void clearFields() {
+        usernameField.setText("");
+        passwordField.setText("");
+    }
+
 
     public JTextField getUsernameField() {
         return usernameField;
