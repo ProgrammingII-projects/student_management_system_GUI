@@ -8,8 +8,11 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import controller.DashboardController;
 import java.awt.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import model.Student;
 import model.StudentDatabase;
+import java.util.List;
 
 public class TableTemplate extends JFrame {
 
@@ -122,6 +125,7 @@ public class TableTemplate extends JFrame {
             if (isSelected) button.setBackground(button.getBackground().darker());
             return button;
         });
+        
 
         // ======== BUTTON EDITOR ========
         class ButtonEditor extends DefaultCellEditor {

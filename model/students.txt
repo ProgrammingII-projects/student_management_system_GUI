@@ -1,2 +1,7 @@
 1005,Mostafa Ali,22,Male,Mechanical Engineering,3.22
 87544,Islam,30,Male,Computer Science,3.0
+1001,Ahmed Hassan,20,Male,Computer Science,3.7
+1002,Sara Mahmoud,15,Female,Computer Science,3.4
+1005,Mostafa Ali,22,Male,Mechanical Engineering,3.22
+1006,Ziad Gebril,20,Male,Computer Science,3.58
+18918,alaa,90,Female,Computer Science,3.4
