@@ -73,7 +73,7 @@ public class Student {
 
 
      public static String validateTexString(String studentName, String ageStr, String gpaAsString) {
-        if (studentName == null || studentName.trim().isEmpty())
+        if (studentName == null || studentName.trim().isEmpty() || !(studentName instanceof String))
             return "Name cannot be empty and must be a valid string";
 
         int age;
