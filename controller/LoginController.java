@@ -32,7 +32,7 @@ public class LoginController {
            // DashboardView dashboardView = new DashboardView();
           //  new DashboardController(dashboardView, database);
         } else {
-            new AlertView("hello","Invalid Username or Password!");
+            new AlertView("hello","Invalid Username or Password!", () -> view.clearFields());
         }
     }
 }

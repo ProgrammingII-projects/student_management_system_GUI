@@ -14,3 +14,5 @@ Commited to: Islam
 Commited to: Islam
 
 6-make back button in all panels and to remove previous panel
+7-Add student in the name takes numbers
+8-the X button in login
