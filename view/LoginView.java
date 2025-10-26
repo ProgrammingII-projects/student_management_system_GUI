@@ -15,25 +15,28 @@ public class LoginView extends JFrame {
     }
 
     private void display() {
-        // === Window setup ===
+        setUndecorated(true);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
         setLocationRelativeTo(null);
         setLayout(new GridBagLayout());
-        getContentPane().setBackground(new Color(10, 25, 74)); // dark blue background
+        getContentPane().setBackground(new Color(10, 25, 74));
+        add(CloseButton.create(this));
 
-        // === GridBag setup ===
+
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // === Fonts and sizes ===
+
         Font labelFont = new Font("Segoe UI", Font.BOLD, 16);
         Font fieldFont = new Font("Segoe UI", Font.PLAIN, 14);
         Dimension fieldSize = new Dimension(250, 35);
         Dimension buttonSize = new Dimension(150, 40);
 
-        // === Title ===
+
         JLabel title = new JLabel("Student Management System Login", SwingConstants.CENTER);
         title.setFont(new Font("Segoe UI", Font.BOLD, 20));
         title.setForeground(Color.WHITE);
@@ -42,14 +45,15 @@ public class LoginView extends JFrame {
         gbc.gridwidth = 2;
         add(title, gbc);
 
-        // === Username label ===
+
+
         JLabel usernameLabel = new JLabel("Username:");
         usernameLabel.setFont(labelFont);
         usernameLabel.setForeground(Color.WHITE);
         gbc.gridy = 1;
         add(usernameLabel, gbc);
 
-        // === Username field ===
+
         usernameField = new JTextField();
         usernameField.setPreferredSize(fieldSize);
         usernameField.setFont(fieldFont);
@@ -60,14 +64,14 @@ public class LoginView extends JFrame {
         gbc.gridy = 2;
         add(usernameField, gbc);
 
-        // === Password label ===
+
         JLabel passwordLabel = new JLabel("Password:");
         passwordLabel.setFont(labelFont);
         passwordLabel.setForeground(Color.WHITE);
         gbc.gridy = 3;
         add(passwordLabel, gbc);
 
-        // === Password field ===
+
         passwordField = new JPasswordField();
         passwordField.setPreferredSize(fieldSize);
         passwordField.setFont(fieldFont);
@@ -78,7 +82,7 @@ public class LoginView extends JFrame {
         gbc.gridy = 4;
         add(passwordField, gbc);
 
-        // === Login button ===
+
         loginButton = new JButton("Login");
         loginButton.setPreferredSize(buttonSize);
         loginButton.setBackground(new Color(0, 153, 51)); // green
@@ -92,7 +96,7 @@ public class LoginView extends JFrame {
         setVisible(true);
     }
 
-    // === Getters ===
+
     public JTextField getUsernameField() {
         return usernameField;
     }

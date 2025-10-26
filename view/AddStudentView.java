@@ -7,12 +7,14 @@ public class AddStudentView extends BaseReusableView {
     private JButton addButton, clearButton;
 
     public AddStudentView() {
+
         super("Add New Student", false);
+        setUndecorated(true);
 
-        // Set dark blue background
-        getContentPane().setBackground(new Color(10, 25, 74)); // dark blue shade
 
-        // Use a null layout if BaseReusableView doesn’t already handle layout
+        getContentPane().setBackground(new Color(10, 25, 74));
+        add(CloseButton.create(this));
+
         setLayout(null);
 
         // Add Student button
@@ -32,6 +34,7 @@ public class AddStudentView extends BaseReusableView {
         clearButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         clearButton.setBounds(260, 320, 120, 40);
         add(clearButton);
+        add(CloseButton.create(this));
 
         // Optional: make buttons look cleaner
         addButton.setBorder(BorderFactory.createEmptyBorder());

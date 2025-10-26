@@ -27,6 +27,7 @@ public class DeleteStudent extends JFrame {
         getContentPane().removeAll();
         getContentPane().setBackground(BACKGROUND_COLOR);
         setLayout(null);
+        setUndecorated(true);
 
         JLabel title = new JLabel("Choose Delete Method", SwingConstants.CENTER);
         title.setFont(TITLE_FONT);
@@ -52,7 +53,7 @@ public class DeleteStudent extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
 
-        // ===== Actions =====
+
         IDButton.addActionListener(e -> {
             dispose();
             SearchDelete();
@@ -62,8 +63,9 @@ public class DeleteStudent extends JFrame {
         ChooseDeleteButton.addActionListener(e -> {
             dispose();
             TableTemplate t = new TableTemplate(controller);
-            t.display("Delete ");
+            t.display("Delete");
         });
+        add(CloseButton.create(this));
     }
 
     public void SearchDelete() {
@@ -96,14 +98,15 @@ public class DeleteStudent extends JFrame {
 
         deleteButton.addActionListener(e -> {
             String input = studentIdField.getText().trim();
-            controller.deleteStudent(input);
+            controller.deleteStudent(input,0);
             dispose();
         });
+        add(CloseButton.create(this));
 
         setVisible(true);
     }
 
-    // ===== Utility Styling Methods =====
+
     private void styleButton(JButton button, Color bgColor) {
         button.setBackground(bgColor);
         button.setForeground(Color.WHITE);
@@ -111,18 +114,6 @@ public class DeleteStudent extends JFrame {
         button.setFont(new Font("Segoe UI", Font.BOLD, 14));
         button.setBorder(BorderFactory.createEmptyBorder());
 
-        // Optional: hover effect
-        button.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                button.setBackground(bgColor.brighter());
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                button.setBackground(bgColor);
-            }
-        });
     }
 
     private void styleTextField(JTextField field) {

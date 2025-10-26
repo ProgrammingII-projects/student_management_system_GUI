@@ -9,9 +9,10 @@ public class DashboardView extends JFrame {
     public DashboardView() {
         setTitle("Dashboard");
         setSize(900, 600);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
+        setUndecorated(true);
 
         Color darkBlue = new Color(10, 25, 74);       // main background
         Color midBlue = new Color(25, 55, 109);       // side panel

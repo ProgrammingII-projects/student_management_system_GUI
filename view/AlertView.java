@@ -1,3 +1,4 @@
+
 package view;
 
 import javax.swing.*;
@@ -10,84 +11,82 @@ public class AlertView {
     private final Color textColor = new Color(230, 230, 230);
 
     public AlertView(String title, String text) {
-        this(title, text, null, null);
+        this(title, text, null, "info");
     }
 
     public AlertView(String title, String text, Runnable onOk) {
-        this(title, text, onOk, null);
+        this(title, text, onOk, "info");
     }
 
+
     public AlertView(String title, String text, Runnable onOk, String type) {
-        // Create undecorated frame
         JFrame frame = new JFrame();
         frame.setUndecorated(true);
-        frame.setSize(380, 190);
+        frame.setSize(450, 200);
         frame.setLocationRelativeTo(null);
         frame.getRootPane().setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220), 1));
-        frame.setBackground(backgroundColor);
+        frame.getContentPane().setBackground(backgroundColor);
 
-        // Shadow panel for soft edges
-        frame.getRootPane().setOpaque(false);
-        JPanel shadowPanel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g.create();
-                g2d.setColor(new Color(0, 0, 0, 50));
-                g2d.fillRoundRect(5, 5, getWidth() - 10, getHeight() - 10, 20, 20);
-                g2d.dispose();
-            }
-        };
-        shadowPanel.setLayout(new BorderLayout());
-        shadowPanel.setOpaque(false);
-
-        // Main content panel
         JPanel panel = new JPanel(new BorderLayout(15, 15));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         panel.setBackground(backgroundColor);
 
-        // Title
         JLabel titleLabel = new JLabel(title, SwingConstants.CENTER);
         titleLabel.setFont(new Font("Segoe UI Semibold", Font.BOLD, 16));
         titleLabel.setForeground(accentColor);
 
-        // Message text
         JLabel label = new JLabel(text, SwingConstants.CENTER);
+        label.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        label.setForeground(textColor);
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setVerticalAlignment(SwingConstants.CENTER);
 
-        label.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        label.setForeground(textColor);
-
-        // OK Button
-        JButton okButton = new JButton("OK");
-        okButton.setFocusPainted(false);
-        okButton.setBackground(accentColor);
-        okButton.setForeground(Color.WHITE);
-        okButton.setFont(new Font("Segoe UI", Font.BOLD, 13));
-        okButton.setBorder(BorderFactory.createEmptyBorder(8, 20, 8, 20));
-        okButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        okButton.setOpaque(true);
-        okButton.setBorderPainted(false);
-
-        okButton.addActionListener(e -> {
-            frame.dispose();
-            if (onOk != null)
-                onOk.run();
-        });
-
-        // Button panel
-        JPanel buttonPanel = new JPanel();
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         buttonPanel.setBackground(backgroundColor);
-        buttonPanel.add(okButton);
 
-        // Layout composition
+        if ("confirm".equalsIgnoreCase(type)) {
+            // Yes / Cancel buttons
+            JButton yesButton = createButton("Yes", new Color(0, 153, 51));
+            JButton cancelButton = createButton("Cancel", new Color(204, 0, 0));
+
+            yesButton.addActionListener(e -> {
+                frame.dispose();
+                if (onOk != null) onOk.run();
+            });
+
+            cancelButton.addActionListener(e -> frame.dispose());
+
+            buttonPanel.add(yesButton);
+            buttonPanel.add(cancelButton);
+        } else {
+            // OK only
+            JButton okButton = createButton("OK", accentColor);
+            okButton.addActionListener(e -> {
+                frame.dispose();
+                if (onOk != null) onOk.run();
+            });
+            buttonPanel.add(okButton);
+        }
+
         panel.add(titleLabel, BorderLayout.NORTH);
         panel.add(label, BorderLayout.CENTER);
         panel.add(buttonPanel, BorderLayout.SOUTH);
-        shadowPanel.add(panel, BorderLayout.CENTER);
-        frame.add(shadowPanel);
-
+        frame.add(panel);
+        frame.setAlwaysOnTop(true);
         frame.setVisible(true);
     }
+
+    private JButton createButton(String text, Color bgColor) {
+        JButton button = new JButton(text);
+        button.setFocusPainted(false);
+        button.setBackground(bgColor);
+        button.setForeground(Color.WHITE);
+        button.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        button.setBorder(BorderFactory.createEmptyBorder(8, 20, 8, 20));
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        button.setOpaque(true);
+        button.setBorderPainted(false);
+        return button;
+    }
 }
+

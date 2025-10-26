@@ -29,7 +29,7 @@ public class DisplayStudent {
         frame.setLayout(new BorderLayout());
         frame.getContentPane().setBackground(new Color(10, 25, 74)); // dark blue background
 
-        // ====== Main Panel ======
+
         JPanel infoPanel = new JPanel(new GridLayout(6, 2, 15, 15));
         infoPanel.setBackground(new Color(10, 25, 74));
         infoPanel.setBorder(BorderFactory.createEmptyBorder(40, 80, 20, 80));
@@ -63,7 +63,7 @@ public class DisplayStudent {
         infoPanel.add(departmentLabel); infoPanel.add(departmentText);
         infoPanel.add(gpaLabel); infoPanel.add(gpaText);
 
-        // ====== Buttons Panel ======
+
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 20));
         buttonPanel.setBackground(new Color(10, 25, 74));
 
@@ -75,11 +75,11 @@ public class DisplayStudent {
         buttonPanel.add(deleteButton);
         buttonPanel.add(backButton);
 
-        // ====== Add Components ======
+
         frame.add(infoPanel, BorderLayout.CENTER);
         frame.add(buttonPanel, BorderLayout.SOUTH);
 
-        // ====== Button Actions ======
+
         editButton.addActionListener(e -> {
             frame.dispose();
             EditStudentView editView = new EditStudentView(student);
@@ -87,13 +87,8 @@ public class DisplayStudent {
         });
 
         deleteButton.addActionListener(e -> {
-            controller.deleteStudent(String.valueOf(student.getStudentID()));
+            controller.deleteStudent(String.valueOf(student.getStudentID()),flag);
             frame.dispose();
-            if (flag == 1) {
-                new TableTemplate(controller).display("Delete ");
-            } else if (flag == 2) {
-                new TableTemplate(controller).display("Show ");
-            }
         });
 
         backButton.addActionListener(e -> {
@@ -106,7 +101,7 @@ public class DisplayStudent {
         frame.setVisible(true);
     }
 
-    // ===== Helper Methods =====
+
     private JLabel createStyledLabel(String text, Font font, Color color) {
         JLabel label = new JLabel(text);
         label.setFont(font);

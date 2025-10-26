@@ -9,8 +9,8 @@ public class EditStudentView extends BaseReusableView {
 
     public EditStudentView(Student student) {
         super("Edit Student", true); // true = allow ID editing if needed
+setUndecorated(true);
 
-        // === Buttons ===
         updateButton = new JButton("Update Student");
         updateButton.setBackground(new Color(0, 153, 51)); // green
         updateButton.setForeground(Color.WHITE);
@@ -27,7 +27,7 @@ public class EditStudentView extends BaseReusableView {
         cancelButton.setBounds(270, 320, 120, 35);
         add(cancelButton);
 
-        // === Fill Fields if Student Provided ===
+
         if (student != null) {
             idField.setText(String.valueOf(student.getStudentID()));
             nameField.setText(student.getName());
@@ -37,14 +37,14 @@ public class EditStudentView extends BaseReusableView {
             gpaField.setText(String.valueOf(student.getGPA()));
         }
 
-        // === Apply Theme ===
+
         getContentPane().setBackground(new Color(10, 25, 74)); // dark blue
         setFieldColors();
 
         setVisible(true);
     }
 
-    // ===== Helper method for white text fields and labels =====
+
     private void setFieldColors() {
         // make text fields readable and consistent
         JTextField[] fields = { idField, nameField, ageField, gpaField };
@@ -55,14 +55,14 @@ public class EditStudentView extends BaseReusableView {
             field.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         }
 
-        // make combo boxes match too
+
         JComboBox<?>[] boxes = { genderField, departmentField };
         for (JComboBox<?> box : boxes) {
             box.setBackground(new Color(20, 40, 100));
             box.setForeground(Color.WHITE);
         }
 
-        // color all labels white
+
         for (Component comp : getContentPane().getComponents()) {
             if (comp instanceof JLabel) {
                 comp.setForeground(Color.WHITE);
@@ -70,7 +70,7 @@ public class EditStudentView extends BaseReusableView {
         }
     }
 
-    // === Getters ===
+
     public JButton getUpdateButton() {
         return updateButton;
     }
