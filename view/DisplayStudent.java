@@ -15,11 +15,13 @@ public class DisplayStudent {
     private static JFrame frame;
     private Student student;
     private DashboardController controller;
+    Boolean flag = false;
 
 
-    public DisplayStudent(Student student, DashboardController controller) {
+    public DisplayStudent(Student student, DashboardController controller,Boolean flag) {
         this.student = student;
         this.controller = controller;
+        this.flag=flag;
         display();
     }
 
@@ -115,17 +117,22 @@ public class DisplayStudent {
             frame.dispose(); // close current display
             EditStudentView editView = new EditStudentView(student);
             new EditStudentController(editView, controller.getDatabase()); // use same DB
+            
         });
 
 
         DeleteButton.addActionListener(e -> {
                 controller.deleteStudent(String.valueOf(student.getStudentID()));
                 frame.dispose(); // close after delete
+                if(flag){
+                TableTemplate t = new TableTemplate(controller); 
+                t.display();
+        }
         });
 
         BackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new AlertView("Under construction.....", null);
+                frame.dispose();
             }
         });
 

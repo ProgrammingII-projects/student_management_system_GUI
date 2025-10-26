@@ -1,4 +1,4 @@
-package view;
+package Unused;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
-import Unused.DisplayStudents;
 import model.*;
 
 public class DisplayStudentsController {

@@ -29,7 +29,7 @@ public class DashboardController {
         );
         view.getDeleteButton().addActionListener(e -> openDeleteWindow());
         view.getSearchButton().addActionListener(e -> openSearchWindow());
-        view.getViewButton().addActionListener(e -> new AlertView("hello","View clicked!"));
+        view.getViewButton().addActionListener(e -> OpenViewWindow());
         view.getExitButton().addActionListener(e -> System.exit(0));
         view.getLogoutButton().addActionListener(e -> {
             view.dispose();
@@ -41,6 +41,13 @@ public class DashboardController {
         SearchStudent searchView = new SearchStudent(this);
         searchView.setVisible(true);
     }
+
+    public void OpenViewWindow() {
+        TableTemplate StudentView = new TableTemplate(this);
+        
+    }
+
+
     public void openDeleteWindow() {
         DeleteStudent deleteView = new DeleteStudent(this);
         deleteView.setVisible(true);
@@ -86,7 +93,7 @@ public class DashboardController {
             Student student = database.searchStudent(id);
 
             if (student != null) {
-               new DisplayStudent(student,this);
+               new DisplayStudent(student,this,false);
 
             } else {
                 new AlertView("Error", "Student not found!");
