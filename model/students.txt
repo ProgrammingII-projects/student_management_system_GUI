@@ -98,3 +98,4 @@
 10098,Nada Fathy,18,Female,Computer Engineering,3.55
 10099,Hazem Adel,21,Male,Information Technology,3.2
 10100,Aya Mohamed,19,Female,Computer Science,3.74
+40519,asdas,40,Male,Computer Science,3.6
