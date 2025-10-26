@@ -1,4 +1,2 @@
-1001,Ahmed Hassan,20,Male,Computer Science,3.7
-1002,Sara Mahmoud,19,Female,Business Administration,3.4
 1005,Mostafa Ali,22,Male,Mechanical Engineering,3.22
-1006,Ziad Gebril,20,Male,Computer Science,3.58
+87544,Islam,30,Male,Computer Science,3.0
