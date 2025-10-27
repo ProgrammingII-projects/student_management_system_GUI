@@ -115,7 +115,6 @@ public class LoginView extends JFrame {
     }
 
     public void clearFields() {
-        usernameField.setText("");
         passwordField.setText("");
     }
 
